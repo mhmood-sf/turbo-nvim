@@ -1,0 +1,10 @@
+# netrw stuff
+.netrwhist
+
+# plugins directories
+pack/
+plugged/
+
+# snap dir
+snap/
+
