@@ -35,13 +35,3 @@ function s:rand() abort
     return l:n
 endfunction
 
-" change separator in file path to g:utils_pathsep
-function utils#fixpath(str)
-    if g:utils_pathsep == '\'
-        return substitute(a:str, '/', g:utils_pathsep, 'g')
-    else
-        return substitute(a:str, '\', g:utils_pathsep, 'g')
-    endif
-endfunction
-
-

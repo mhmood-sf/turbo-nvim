@@ -30,7 +30,7 @@ filetype plugin indent on  " allows autoindenting depending on filetype
 syntax on                  " syntax highlighting
 
 " =============================================================================
-" === Key Mappings ============================================================
+" === Mappings / Autocmds =====================================================
 " =============================================================================
 
 noremap ; :
@@ -50,18 +50,20 @@ Plug 'jiangmiao/auto-pairs' " Autocomplete for pairs
 
 call plug#end()
 
-" so Snap can parse larger files
+" Allow Snap to parse larger files
 set maxfuncdepth=200
 
-" enable skyline
-let g:skyline_status = 1
-let g:skyline_tab    = 1
+" TeX options
+let g:tex_flavor = 'latex'
+let g:tex_viewer = 'SumatraPDF.exe'
+let g:tex_preamble = fnamemodify($MYVIMRC, ':p:h') . "/preamble.tex"
+" Add common math zones
+autocmd BufNewFile,BufRead *.tex call TexNewMathZone('M', 'align', 1)
 
 " =============================================================================
 " === Theme ===================================================================
 " =============================================================================
 
-" Themes: default, nord
-
+" Themes: default, nord, onedark
 colorscheme nord
 

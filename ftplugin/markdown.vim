@@ -1,5 +1,5 @@
 " === Markdown ================================================================
 
 " === Common settings
-setlocal spell
+setlocal nospell
 
