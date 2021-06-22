@@ -57,8 +57,6 @@ set maxfuncdepth=200
 let g:tex_flavor = 'latex'
 let g:tex_viewer = 'SumatraPDF.exe'
 let g:tex_preamble = fnamemodify($MYVIMRC, ':p:h') . "/preamble.tex"
-" Add common math zones
-autocmd BufNewFile,BufRead *.tex call TexNewMathZone('M', 'align', 1)
 
 " =============================================================================
 " === Theme ===================================================================
