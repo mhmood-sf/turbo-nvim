@@ -64,7 +64,7 @@ function! s:build(...) abort
     " Obtain absolute path to source file's directory
     let l:incpath = fnamemodify(l:fpath, ':hp')
 
-    let l:exe = 'pdflatex'
+    let l:exe = 'pdflatex.exe'
     let l:aux = ' --aux-directory=' . l:auxpath
     let l:out = ' --output-directory=' . l:outpath
     let l:inc = ' --include-directory=' . l:incpath
