@@ -1,7 +1,6 @@
 " =============================================================================
 " === Common ==================================================================
 " =============================================================================
-
 set nocompatible           " disable compatibility to old-time vim
 set showmatch              " show matching brackets
 set ignorecase             " case insensitive matching
@@ -25,14 +24,16 @@ set showtabline=2          " Always show tabline
 set spelllang=en_gb        " Set spelling language
 set complete+=k            " Enable dictionary words in completion list
 set list                   " Show trailing whitespace
+set ff=unix                " Use unix file endings
 
 filetype plugin indent on  " allows autoindenting depending on filetype
 syntax on                  " syntax highlighting
 
+let g:home_dir = fnamemodify($MYVIMRC, ':p:h')
+
 " =============================================================================
 " === Mappings / Autocmds =====================================================
 " =============================================================================
-
 noremap ; :
 
 " Use Esc to exit terminal-insert mode
@@ -41,12 +42,11 @@ tmap <Esc> <C-\><C-n>
 " =============================================================================
 " === Plugins =================================================================
 " =============================================================================
-
-" Vim-Plug
-call plug#begin('~/AppData/Local/nvim/plugged')
+call plug#begin(g:home_dir . '/pack/plugged/start/')
 
 Plug 'ervandew/supertab'    " Easier tab completion
 Plug 'jiangmiao/auto-pairs' " Autocomplete for pairs
+Plug 'vimwiki/vimwiki'      " VimWiki
 
 call plug#end()
 
@@ -56,7 +56,14 @@ set maxfuncdepth=200
 " TeX options
 let g:tex_flavor = 'latex'
 let g:tex_viewer = 'SumatraPDF.exe'
-let g:tex_preamble = fnamemodify($MYVIMRC, ':p:h') . "/preamble.tex"
+"let g:tex_preamble = g:home_dir . "/preamble.tex"
+
+" VimWiki Settings
+if has('win32')
+    let g:vimwiki_list = [#{path: 'E:/_/Notes/wiki', html: 'E:/_/Notes/wikihtml'}]
+else
+    let g:vimwiki_list = [#{path: '/mnt/e/_/Notes/wiki', html: '/mnt/e/_/Notes/wikihtml'}]
+endif
 
 " =============================================================================
 " === Theme ===================================================================

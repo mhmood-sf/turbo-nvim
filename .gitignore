@@ -1,10 +1,10 @@
 # netrw stuff
 .netrwhist
 
-# plugins directories
-pack/
-plugged/
+# plugins
+pack
 
-# snap dir
+# misc
 snap/
+preamble.tex
 
