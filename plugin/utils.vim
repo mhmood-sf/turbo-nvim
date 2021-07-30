@@ -1,18 +1,15 @@
 " === Utils ==================================================================
 
-" === Options
-let g:utils_pathsep = '/'  " separator for filepaths, either '/' or '\'
-
 " === Editor Commands
-command -nargs=0 BufClean call s:bufclean()
-command -nargs=0 Rand echo s:rand()
+command -nargs=0 BufClean call BufClean()
+command -nargs=0 Rand echo RandNr()
 command -nargs=0 InitVim edit $MYVIMRC
 
 " =============================================================================
 
 " Delete all buffers except current one
 " Errors if a buffer is unsaved
-function s:bufclean() abort
+function! BufClean() abort
     let l:cnt = 0
     for buf in getbufinfo()
         " check if buffer is active or not
@@ -30,8 +27,29 @@ function s:bufclean() abort
 endfunction
 
 " gives a random number from 0-9
-function s:rand() abort
+function! RandNr() abort
     let l:n = str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+'))[0]
     return l:n
+endfunction
+
+function! WSLToWinPath(path)
+    return ""
+endfunction
+
+function! WinToWSLPath(path)
+    return ""
+endfunction
+
+function! LoremIpsum()
+    let str = [ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
+              \ "do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              \ "Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+              \ "laboris nisi ut aliquip ex ea commodo consequat. Duis aute",
+              \ "irure dolor in reprehenderit in voluptate velit esse cillum",
+              \ "dolore eu fugiat nulla pariatur. Excepteur sint occaecat",
+              \ "cupidatat non proident, sunt in culpa qui officia deserunt",
+              \ "deserunt mollit anim id est laborum."
+              \ ]
+    return join(str, "\n")
 endfunction
 

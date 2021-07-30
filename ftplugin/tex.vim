@@ -3,15 +3,15 @@
 " === Editor commands
 command! -buffer -nargs=0 Open      call s:open()
 command! -buffer -nargs=0 Build     call s:build()
-command! -buffer -nargs=0 SetMain   let s:tex_maindoc=expand('%')
-command! -buffer -nargs=0 OpenHere  call s:open(expand('%:p'))
-command! -buffer -nargs=0 BuildHere call s:build(expand('%:p'))
+command! -buffer -nargs=0 SetMain   let s:tex_maindoc=expand("%")
+command! -buffer -nargs=0 OpenHere  call s:open(expand("%:p"))
+command! -buffer -nargs=0 BuildHere call s:build(expand("%:p"))
 
 command! -range -buffer -nargs=0 Glance <line1>,<line2>call s:preview()
 
 " === Options
-let g:tex_viewer   = exists('g:tex_viewer') ? g:tex_viewer : ''
-let g:tex_preamble = exists('g:tex_preamble') ? g:tex_preamble : ''
+let g:tex_viewer   = exists("g:tex_viewer") ? g:tex_viewer : ""
+let g:tex_preamble = exists("g:tex_preamble") ? g:tex_preamble : ""
 
 " =============================================================================
 
@@ -28,17 +28,17 @@ function! s:open(...) abort
 
     if a:0 > 0
         let l:fpath = a:1
-    elseif exists('s:tex_maindoc')
+    elseif exists("s:tex_maindoc")
         let l:fpath = s:tex_maindoc
     else
-        let l:fpath = expand('%:p')
+        let l:fpath = expand("%:p")
     endif
 
     " Get the outpath for the file and change extension to pdf
-    let l:file = fnamemodify(l:fpath, ':s?src?out?:rp') . '.pdf'
-    let l:cmd  = g:tex_viewer . ' ' . l:file
+    let l:file = fnamemodify(l:fpath, ":s?src?out?:rp") . ".pdf"
+    let l:cmd  = g:tex_viewer . " " . l:file
 
-    call jobstart(l:cmd, {'detach': 1})
+    call jobstart(l:cmd, {"detach": 1})
 endfunction
 
 " First arg is the file to build. If
@@ -49,27 +49,27 @@ endfunction
 function! s:build(...) abort
     if a:0 > 0
         let l:fpath = a:1
-    elseif exists('s:tex_maindoc')
+    elseif exists("s:tex_maindoc")
         let l:fpath = s:tex_maindoc
     else
-        let l:fpath = expand('%:p')
+        let l:fpath = expand("%:p")
     endif
 
     " Get source file absolute path (and remove extension)
-    let l:srcfile = fnamemodify(l:fpath, ':p')
+    let l:srcfile = fnamemodify(l:fpath, ":p")
     " Replace src/ with aux/ (and remove filename)
-    let l:auxpath = fnamemodify(l:fpath, ':s?src?bin?:hp')
+    let l:auxpath = fnamemodify(l:fpath, ":s?src?bin?:hp")
     " Replace src/ with out/ (and remove filename)
-    let l:outpath = fnamemodify(l:fpath, ':s?src?out?:hp')
+    let l:outpath = fnamemodify(l:fpath, ":s?src?out?:hp")
     " Obtain absolute path to source file's directory
-    let l:incpath = fnamemodify(l:fpath, ':hp')
+    let l:incpath = fnamemodify(l:fpath, ":hp")
 
-    let l:exe = 'pdflatex.exe'
-    let l:aux = ' --aux-directory=' . l:auxpath
-    let l:out = ' --output-directory=' . l:outpath
-    let l:inc = ' --include-directory=' . l:incpath
+    let l:exe = "pdflatex"
+    let l:aux = " --aux-directory=" . l:auxpath
+    let l:out = " --output-directory=" . l:outpath
+    let l:inc = " --include-directory=" . l:incpath
 
-    let l:cmd = l:exe . l:aux . l:out . l:inc . ' ' . l:srcfile
+    let l:cmd = l:exe . l:aux . l:out . l:inc . " " . l:srcfile
 
     echo "Compiling..."
     let l:output = split(system(l:cmd), "\n")
@@ -84,7 +84,7 @@ function! s:printFormatted(output) abort
     redraw
 
     if len(a:output) <= 0
-        echo 'No output available.'
+        echo "No output available."
         return 1
     endif
 
@@ -99,7 +99,7 @@ function! s:printFormatted(output) abort
         return 1
     endif
 
-    echom 'Errors/Warnings:'
+    echom "Errors/Warnings:"
     for line in a:output
         echom line
     endfor
@@ -112,10 +112,10 @@ endfunction
 " for the preview method, and creates
 " the necessary directories.
 function! s:get_tmpfile() abort
-    if exists('s:tmpfile')
+    if exists("s:tmpfile")
         return s:tmpfile
     else
-        let l:tmpdir = fnamemodify(tempname(), ':h') . "/src"
+        let l:tmpdir = fnamemodify(tempname(), ":h") . "/src"
         call mkdir(l:tmpdir, "p")
 
         let s:tmpfile = fnamemodify(l:tmpdir . "/preview.tex", ":p")
