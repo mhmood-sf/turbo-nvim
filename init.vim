@@ -1,20 +1,19 @@
 " =============================================================================
 " === Common ==================================================================
 " =============================================================================
-set nocompatible           " disable compatibility to old-time vim
-set showmatch              " show matching brackets
-set ignorecase             " case insensitive matching
-set mouse=v                " middle-click paste with mouse
-set hlsearch               " highlight search results
-set tabstop=4              " number of columns occupied by a tab character
-set softtabstop=4          " set multiple spaces as tabstops
-set expandtab              " converts tabs to whitespace
-set shiftwidth=4           " width for autoindents
-set autoindent             " indent new line the same as the last line
-set number                 " add line numbers
-set ruler                  " show line number on bar
-set wildmode=longest,list  " get bash-like tab completions
-set cc=80                  " set an 80-column border for good coding style
+set nocompatible           " Disable compatibility to old-time vim
+set showmatch              " Show matching brackets
+set ignorecase             " Case insensitive matching
+set hlsearch               " Highlight search results
+set tabstop=4              " Number of columns occupied by a tab character
+set softtabstop=4          " Set multiple spaces as tabstops
+set expandtab              " Converts tabs to whitespace
+set shiftwidth=4           " Width for autoindents
+set autoindent             " Indent new line the same as the last line
+set number                 " Add line numbers
+set ruler                  " Show cursor position in default statusline
+set cc=80                  " Set color column for cleaner code
+set wildmode=longest,list  " Get bash-like tab completions
 set termguicolors          " Use 24-bit RGB colors (see :help tgc)
 set cursorline             " Highlight current line
 set notitle                " Do not set terminal title
@@ -29,7 +28,11 @@ set ff=unix                " Use unix file endings
 filetype plugin indent on  " allows autoindenting depending on filetype
 syntax on                  " syntax highlighting
 
-let g:home_dir = fnamemodify($MYVIMRC, ':p:h')
+let g:home_dir = fnamemodify($MYVIMRC, ":p:h")
+
+" Save undo tree
+set undofile
+execute "set undodir=" . g:home_dir . "/undo/"
 
 " =============================================================================
 " === Mappings / Autocmds =====================================================
@@ -39,51 +42,86 @@ noremap ; :
 " Use Esc to exit terminal-insert mode
 tmap <Esc> <C-\><C-n>
 
-" Arrow keys for split sizes
-" Up    - increase height
-" Down  - decrease height
-" Right - increase width
-" Left  - decrease width
+" Window sizes
+" Up/Down    - +/- height
+" Right/Left - +/- width
 nnoremap <Up> <C-W>+
 nnoremap <Down> <C-W>-
 nnoremap <Left> <C-W><
 nnoremap <Right> <C-W>>
 
+" Highlighting for ejs files
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+
 " =============================================================================
 " === Plugins =================================================================
 " =============================================================================
 
-call plug#begin(g:home_dir . "/pack/plugged/start")
-Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
-Plug 'vimwiki/vimwiki'
-call plug#end()
+lua << EOF
+require "jet/jet"
 
-call glup#begin(g:home_dir)
+-- Initialize glup
+Jet.pack(vim.g.home_dir)
 
-GlupGroup "quintik"
-    GlupOpt "https://github.com/quintik/qline"
-    GlupOpt "https://github.com/qunitik/snap"
-GlupGroup "plugged"
-    Glup "https://github.com/ervandew/supertab"
-    Glup "https://github.com/jiangmiao/auto-pairs"
-    Glup "https://github.com/vimwiki/vimwiki"
+-- My own plugins
+local quintik = Jet.group "quintik"
 
-call glup#end()
+quintik:start {
+    "git@github.com:quintik/qline",
+    "git@github.com:quintik/Snip"
+}
+
+-- Other plugins
+local jet = Jet.group "jet"
+
+jet:start {
+    "git@github.com:ervandew/supertab",
+    "git@github.com:vimwiki/vimwiki"
+}
+
+--[[
+local test = Jet.group "test"
+
+test:start {
+    "uri",
+
+    {
+        uri = "uri",
+        name = "gloop",
+        flags = { "--depth", "1", "--branch", "feature/xclip" }
+    }
+}
+
+test:opt {
+    "uri",
+
+    {
+        uri = "uri",
+        name = "glopt",
+        args = { "--depth", "1", "--branch", "feature/xclip" },
+        load_evt = "CmdUndefined",
+        load_fn = function(match, _buf, _file) return match == "Telescope" end,
+        post_load = function() print("Telescope loaded.") end,
+        post_install = function() print("Telescope installed.") end
+    }
+}
+--]]
+EOF
 
 " Allow Snap to parse larger files
 set maxfuncdepth=200
 
 " TeX options
-let g:tex_flavor = 'latex'
-let g:tex_viewer = 'SumatraPDF.exe'
+let g:tex_flavor   = "latex"
+let g:tex_viewer   = "SumatraPDF.exe"
+let g:tex_conceal  = "d"
 let g:tex_preamble = g:home_dir . "/preamble.tex"
 
 " VimWiki Settings
-if has('win32')
-    let g:vimwiki_list = [#{path: 'E:/_/Notes/wiki', html: 'E:/_/Notes/wikihtml'}]
-elseif has('unix')
-    let g:vimwiki_list = [#{path: '/mnt/e/_/Notes/wiki', html: '/mnt/e/_/Notes/wikihtml'}]
+if has("win32")
+    let g:vimwiki_list = [#{path: "E:/_/Notes/wiki", html: "E:/_/Notes/wikihtml"}]
+elseif has("unix")
+    let g:vimwiki_list = [#{path: "/mnt/e/_/Notes/wiki", html: "/mnt/e/_/Notes/wikihtml"}]
 endif
 
 " =============================================================================
@@ -91,5 +129,5 @@ endif
 " =============================================================================
 
 " Themes: default, nord, onedark
-colorscheme nord
+colorscheme onedark
 
