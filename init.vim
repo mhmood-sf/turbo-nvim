@@ -1,3 +1,7 @@
+" Author: quintik <https://github.com/quintik>
+
+let g:home_dir = fnamemodify($MYVIMRC, ":p:h")
+
 " =============================================================================
 " === Common ==================================================================
 " =============================================================================
@@ -25,14 +29,12 @@ set complete+=k            " Enable dictionary words in completion list
 set list                   " Show trailing whitespace
 set ff=unix                " Use unix file endings
 
-filetype plugin indent on  " allows autoindenting depending on filetype
-syntax on                  " syntax highlighting
-
-let g:home_dir = fnamemodify($MYVIMRC, ":p:h")
-
 " Save undo tree
 set undofile
 execute "set undodir=" . g:home_dir . "/undo/"
+
+filetype plugin indent on  " Allow autoindenting depending on filetype
+syntax on                  " Syntax highlighting
 
 " =============================================================================
 " === Mappings / Autocmds =====================================================
@@ -57,26 +59,27 @@ autocmd BufNewFile,BufRead *.ejs set filetype=html
 " === Plugins =================================================================
 " =============================================================================
 
+" Plugin Manager: https://github.com/quintik/jet
 lua << EOF
 require "jet/jet"
 
--- Initialize glup
+-- Initialize jet
 Jet.pack(vim.g.home_dir)
 
 -- My own plugins
 local quintik = Jet.group "quintik"
 
 quintik:start {
-    "git@github.com:quintik/qline",
-    "git@github.com:quintik/Snip"
+    "https://github.com/quintik/qline",
+    "https://github.com/quintik/Snip"
 }
 
 -- Other plugins
 local jet = Jet.group "jet"
 
 jet:start {
-    "git@github.com:ervandew/supertab",
-    "git@github.com:vimwiki/vimwiki"
+    "https://github.com/ervandew/supertab",
+    "https://github.com/vimwiki/vimwiki"
 }
 
 --[[
@@ -108,7 +111,7 @@ test:opt {
 --]]
 EOF
 
-" Allow Snap to parse larger files
+" Allow Snip to parse larger files
 set maxfuncdepth=200
 
 " TeX options
@@ -128,6 +131,8 @@ endif
 " === Theme ===================================================================
 " =============================================================================
 
-" Themes: default, nord, onedark
+" Installed Themes:
+" nord: https://github.com/arcticicestudio/nord-vim/
+" onedark: https://github.com/joshdick/onedark.vim
 colorscheme onedark
 
