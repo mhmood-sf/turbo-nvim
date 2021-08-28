@@ -5,7 +5,7 @@
 let g:zen_netrw = exists('g:zen_netrw') ? g:zen_netrw : 1
 
 " === Editor commands
-command Zen call s:zen()  " Toggle zen mode
+command! Zen call s:zen()  " Toggle zen mode
 
 " =============================================================================
 
