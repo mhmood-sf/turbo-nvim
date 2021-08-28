@@ -1,15 +1,20 @@
 " === TeX =====================================================================
 
-" === Editor commands
-command! -buffer -nargs=0 Open      call s:open()
-command! -buffer -nargs=0 Build     call s:build()
-command! -buffer -nargs=0 SetMain   let s:tex_maindoc=expand("%")
-command! -buffer -nargs=0 OpenHere  call s:open(expand("%:p"))
-command! -buffer -nargs=0 BuildHere call s:build(expand("%:p"))
+" == TeX-specific vim settings
+setlocal wrap
+setlocal linebreak
+setlocal conceallevel=2
 
-command! -range -buffer -nargs=0 Glance <line1>,<line2>call s:preview()
+" === Custom editor commands
+command! -buffer -nargs=0 TeXOpen      call s:open()
+command! -buffer -nargs=0 TeXBuild     call s:build()
+command! -buffer -nargs=0 TeXSetMain   let s:tex_maindoc=expand("%")
+command! -buffer -nargs=0 TeXOpenThis  call s:open(expand("%:p"))
+command! -buffer -nargs=0 TeXBuildThis call s:build(expand("%:p"))
 
-" === Options
+command! -range -buffer -nargs=0 TeXGlance <line1>,<line2>call s:preview()
+
+" === Custom options
 let g:tex_viewer   = exists("g:tex_viewer") ? g:tex_viewer : ""
 let g:tex_preamble = exists("g:tex_preamble") ? g:tex_preamble : ""
 
