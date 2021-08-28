@@ -4,6 +4,7 @@
 command -nargs=0 BufClean call BufClean()
 command -nargs=0 Rand echo RandNr()
 command -nargs=0 InitVim edit $MYVIMRC
+command -nargs=0 LoremIpsum put =LoremIpsum()
 
 " =============================================================================
 
