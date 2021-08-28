@@ -1,10 +1,23 @@
-# netrw stuff
-.netrwhist
+# to keep it small, stuff that is
+# already specified in init.vim
+# like pack plugins/colors/etc
+# which already have their own repo
+# are ignored.
 
-# plugins
+# pack plugins
 pack/
 
+# colors
+colors/
+
+# undodir
+undo/
+
+# lua plugins
+lua/jet/
+
 # misc
-snap/
+snip/
 preamble.tex
+.netrwhist
 
