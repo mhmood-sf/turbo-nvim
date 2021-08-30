@@ -1,6 +1,6 @@
 " Author: quintik <https://github.com/quintik>
 
-let g:home_dir = fnamemodify($MYVIMRC, ":p:h")
+let s:cfg_dir = stdpath("config")
 
 " =============================================================================
 " === Common ==================================================================
@@ -31,7 +31,7 @@ set ff=unix                " Use unix file endings
 
 " Save undo tree
 set undofile
-execute "set undodir=" . g:home_dir . "/undo/"
+execute "set undodir=" . s:cfg_dir . "/undo/"
 
 filetype plugin indent on  " Allow autoindenting depending on filetype
 syntax on                  " Syntax highlighting
@@ -70,7 +70,7 @@ lua << EOF
 require "jet/jet"
 
 -- Initialize jet
-Jet.pack { path = vim.g.home_dir, ssh = "~/.ssh/id_rsa" }
+Jet.pack { path = vim.fn.stdpath("config") , ssh = "~/.ssh/id_rsa" }
 
 -- My own plugins
 local quintik = Jet.group "quintik"
@@ -98,7 +98,7 @@ set maxfuncdepth=200
 let g:tex_flavor   = "latex"
 let g:tex_viewer   = "SumatraPDF.exe"
 let g:tex_conceal  = "d"
-let g:tex_preamble = g:home_dir . "/preamble.tex"
+let g:tex_preamble = s:cfg_dir . "/preamble.tex"
 
 " VimWiki Settings
 if has("win32")
@@ -109,15 +109,16 @@ endif
 
 " Startify Settings
 let g:startify_lists = [
-      \ { 'type': 'files',    'header': ['   Recently used'] },
-      \ { 'type': 'dir',      'header': ['   Recently used in '. getcwd()] },
+      \ { "type": "files",    "header": ["   Recently used"] },
+      \ { "type": "dir",      "header": ["   Recently used in ". getcwd()] },
       \ ]
 
 let g:startify_enable_special = 0
 let g:startify_change_to_dir = 0
 let g:startify_padding_left = 10
 let g:startify_files_number = 5
-let g:startify_custom_header = startify#pad(readfile('./startify.txt'))
+let g:startify_custom_header = startify#pad(
+            \ readfile(s:cfg_dir . "/startify.txt"))
 
 " =============================================================================
 " === Theme ===================================================================
