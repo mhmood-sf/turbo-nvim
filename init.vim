@@ -39,14 +39,20 @@ syntax on                  " Syntax highlighting
 " =============================================================================
 " === Mappings / Autocmds =====================================================
 " =============================================================================
-noremap ; :
+
+" Use space/backspace to repeat f/F/t/T motions
+nnoremap <Space> ;
+nnoremap <BS> ,
+
+" Avoid having to press shift all the time
+nnoremap ; :
 
 " Use Esc to exit terminal-insert mode
 tmap <Esc> <C-\><C-n>
 
 " Window sizes
-" Up/Down    - +/- height
-" Right/Left - +/- width
+" Up/Down: +/- height
+" Right/Left: +/- width
 nnoremap <Up> <C-W>+
 nnoremap <Down> <C-W>-
 nnoremap <Left> <C-W><
@@ -64,51 +70,25 @@ lua << EOF
 require "jet/jet"
 
 -- Initialize jet
-Jet.pack(vim.g.home_dir)
+Jet.pack { path = vim.g.home_dir, ssh = "~/.ssh/id_rsa" }
 
 -- My own plugins
 local quintik = Jet.group "quintik"
 
 quintik:start {
-    "https://github.com/quintik/qline",
-    "https://github.com/quintik/Snip"
+    "git@github.com:quintik/qline",
+    "git@github.com:quintik/Snip"
 }
 
 -- Other plugins
 local jet = Jet.group "jet"
 
 jet:start {
-    "https://github.com/ervandew/supertab",
-    "https://github.com/vimwiki/vimwiki"
+    "git@github.com:ervandew/supertab",
+    "git@github.com:vimwiki/vimwiki",
+    "git@github.com:mhinz/vim-startify",
 }
 
---[[
-local test = Jet.group "test"
-
-test:start {
-    "uri",
-
-    {
-        uri = "uri",
-        name = "gloop",
-        flags = { "--depth", "1", "--branch", "feature/xclip" }
-    }
-}
-
-test:opt {
-    "uri",
-
-    {
-        uri = "uri",
-        name = "glopt",
-        args = { "--depth", "1", "--branch", "feature/xclip" },
-        load_evt = "CmdUndefined",
-        load_fn = function(match, _buf, _file) return match == "Telescope" end,
-        post_load = function() print("Telescope loaded.") end,
-        post_install = function() print("Telescope installed.") end
-    }
-}
---]]
 EOF
 
 " Allow Snip to parse larger files
@@ -126,6 +106,18 @@ if has("win32")
 elseif has("unix")
     let g:vimwiki_list = [#{path: "/mnt/e/_/Notes/wiki", html: "/mnt/e/_/Notes/wikihtml"}]
 endif
+
+" Startify Settings
+let g:startify_lists = [
+      \ { 'type': 'files',    'header': ['   Recently used'] },
+      \ { 'type': 'dir',      'header': ['   Recently used in '. getcwd()] },
+      \ ]
+
+let g:startify_enable_special = 0
+let g:startify_change_to_dir = 0
+let g:startify_padding_left = 10
+let g:startify_files_number = 5
+let g:startify_custom_header = startify#pad(readfile('./startify.txt'))
 
 " =============================================================================
 " === Theme ===================================================================
