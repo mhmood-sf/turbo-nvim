@@ -19,7 +19,7 @@ function s:zen() abort
         set showtabline=0
 
         " close all other windows
-        execute "only"
+        execute "silent only"
 
         let s:zen_toggle = 0
     else
@@ -32,7 +32,7 @@ function s:zen() abort
             " silence output so cmdheight doesnt overflow
             execute "silent Vexplore"
             " go back to previous window after opening netrw
-            execute "wincmd p"
+            execute "silent wincmd p"
         endif
 
         let s:zen_toggle = 1
