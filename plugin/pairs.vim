@@ -1,19 +1,21 @@
 " === Pairs ========================================================
 
+let s:pairs = {}
+
+" When the right part of a pair is typed,
+" check to see if it is already there,
+" and skip it if so.
 function! CompletePair(b)
     " get cursor position
     let pos = getpos('.')
     let line_nr = pos[1]
     let col_nr = pos[2]
 
-    echom "line nr: " . line_nr
-    echom "col nr: " . col_nr
-
     " get current line
     let line = getline(line_nr)
-    echom "line: " . line
-    echom "len: " . len(line)
 
+    " no next character, i.e cursor is at
+    " the end of the line, so return early.
     if col_nr > len(line)
         return a:b
     endif
@@ -23,21 +25,57 @@ function! CompletePair(b)
     " convert line to list of char codes
     let codes = str2list(line)
     " use column number to get code for next character
+    " - 1 cos 0-indexed array
     let next = codes[col_nr - 1]
 
     " if it's the same character, don't insert it.
     return code == next ? "\<Right>" : a:b
 endfunction
 
-function! s:pair(ab)
-    let a = a:ab[0]
-    let b = a:ab[1]
+function! ConsumePair()
+    " get cursor position
+    let pos = getpos('.')
+    let line_nr = pos[1]
+    let col_nr = pos[2]
 
-    execute("inoremap " . a . " " . a . b . "<Left>")
-    if a != b
-        execute("inoremap " . b . " <C-R>=CompletePair('" . b . "')<CR>")
+    " get current line
+    let line = getline(line_nr)
+
+    " cursor is at the end of the line,
+    " return early
+    if col_nr > len(line)
+        return "\<BS>"
+    endif
+
+    " convert to char codes list
+    let codes = str2list(line)
+
+    " get left right characters
+    let left_char = nr2char(codes[col_nr - 2])
+    let right_char = nr2char(codes[col_nr - 1])
+
+    " check if left right chars are a pair
+    " and return the appropriate key sequence
+    if get(s:pairs, left_char, "") == right_char
+        return "\<Right>\<BS>\<BS>"
+    else
+        return "\<BS>"
+    end
+endfunction
+
+function! s:pair(leftc_rightc)
+    let leftc = a:leftc_rightc[0]
+    let rightc = a:leftc_rightc[1]
+
+    let s:pairs[leftc] = rightc
+
+    execute("inoremap " . leftc . " " . leftc . rightc . "<Left>")
+    if leftc != rightc
+        execute("inoremap " . rightc . " <C-R>=CompletePair('" . rightc . "')<CR>")
     endif
 endfunction
+
+inoremap <BS> <C-R>=ConsumePair()<CR>
 
 call s:pair('()')
 call s:pair('{}')
