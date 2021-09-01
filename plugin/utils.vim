@@ -1,12 +1,47 @@
 " === Utils ==================================================================
 
+" === Options
+let g:utils_mru_size = exists("g:utils_mru_size") ? g:utils_mru_size : 10
+
 " === Editor Commands
-command -nargs=0 BufClean call BufClean()
-command -nargs=0 Rand echo RandNr()
-command -nargs=0 InitVim edit $MYVIMRC
-command -nargs=0 LoremIpsum put =LoremIpsum()
+command! -nargs=0 BufClean   call BufClean()
+command! -nargs=0 Rand       echo RandNr()
+command! -nargs=0 InitVim    edit $MYVIMRC
+command! -nargs=0 LoremIpsum put =LoremIpsum()
+command! -nargs=0 MRU        call MRU()
 
 " =============================================================================
+
+" Show list of recently used files, excluding /tmp/
+" files, and prompt which one to open.
+function! MRU() abort
+    let lines = split(execute("oldfiles"), "\n")
+    let reindexed = []
+    let index = 0
+
+    call filter(lines, {i, v -> match(v, '^\d\+: /tmp/') < 0})
+    for line in lines
+        if index <= g:utils_mru_size
+            call add(reindexed, substitute(line, '^\d\+: ', "", ""))
+            echo index . ": " . reindexed[index]
+            let index = index + 1
+        else
+            break
+        endif
+    endfor
+
+    echo repeat("- ", 5)
+    let i = input("Open file <non-digit to exit>: ")
+
+    " check no non-digit character
+    if match(i, '\D') < 0
+        let n = str2nr(i)
+        " check index range
+        if n >= 0 && n <= g:utils_mru_size
+            execute "edit " . reindexed[n]
+        endif
+    endif
+endfunction
 
 " Delete all buffers except current one
 " Errors if a buffer is unsaved
