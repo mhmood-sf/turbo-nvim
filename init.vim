@@ -37,7 +37,7 @@ filetype plugin indent on  " Allow autoindenting depending on filetype
 syntax on                  " Syntax highlighting
 
 " =============================================================================
-" === Mappings / Autocmds =====================================================
+" === Mappings / Commands =====================================================
 " =============================================================================
 
 " Use space/backspace to repeat f/F/t/T motions
@@ -86,7 +86,6 @@ local jet = Jet.group "jet"
 jet:start {
     "git@github.com:ervandew/supertab",
     "git@github.com:vimwiki/vimwiki",
-    "git@github.com:mhinz/vim-startify",
 }
 
 EOF
@@ -106,19 +105,6 @@ if has("win32")
 elseif has("unix")
     let g:vimwiki_list = [#{path: "/mnt/e/_/Notes/wiki", html: "/mnt/e/_/Notes/wikihtml"}]
 endif
-
-" Startify Settings
-let g:startify_lists = [
-      \ { "type": "files",    "header": ["   Recently used"] },
-      \ { "type": "dir",      "header": ["   Recently used in ". getcwd()] },
-      \ ]
-
-let g:startify_enable_special = 0
-let g:startify_change_to_dir = 0
-let g:startify_padding_left = 10
-let g:startify_files_number = 5
-let g:startify_custom_header = startify#pad(
-            \ readfile(s:cfg_dir . "/startify.txt"))
 
 " =============================================================================
 " === Theme ===================================================================
