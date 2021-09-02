@@ -1,11 +1,7 @@
-" Author: quintik <https://github.com/quintik>
+" === init ====================================================================
 
-let s:cfg_dir = stdpath("config")
+let cfg_dir = stdpath("config")
 
-" =============================================================================
-" === Common ==================================================================
-" =============================================================================
-set nocompatible           " Disable compatibility to old-time vim
 set showmatch              " Show matching brackets
 set ignorecase             " Case insensitive matching
 set hlsearch               " Highlight search results
@@ -31,14 +27,12 @@ set ff=unix                " Use unix file endings
 
 " Save undo tree
 set undofile
-execute "set undodir=" . s:cfg_dir . "/undo/"
+execute "set undodir=" . cfg_dir . "/undo/"
 
 filetype plugin indent on  " Allow autoindenting depending on filetype
 syntax on                  " Syntax highlighting
 
-" =============================================================================
-" === Mappings / Commands =====================================================
-" =============================================================================
+" === Mappings & Commands =====================================================
 
 " Use space/backspace to repeat f/F/t/T motions
 nnoremap <Space> ;
@@ -61,11 +55,9 @@ nnoremap <Right> <C-W>>
 " Highlighting for ejs files
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 
-" =============================================================================
 " === Plugins =================================================================
-" =============================================================================
 
-" Plugin Manager: https://github.com/quintik/jet
+" Jet configuration
 lua << EOF
 require "jet/jet"
 
@@ -86,8 +78,14 @@ local jet = Jet.group "jet"
 jet:start {
     "git@github.com:ervandew/supertab",
     "git@github.com:vimwiki/vimwiki",
+    "git@github.com:neovim/nvim-lspconfig",
+    "git@github.com:nvim-treesitter/nvim-treesitter",
+    "git@github.com:joshdick/onedark.vim"
 }
 
+-- Configuration for lua plugins
+require "treesitter"
+require "lsp"
 EOF
 
 " Allow Snip to parse larger files
@@ -97,21 +95,15 @@ set maxfuncdepth=200
 let g:tex_flavor   = "latex"
 let g:tex_viewer   = "SumatraPDF.exe"
 let g:tex_conceal  = "d"
-let g:tex_preamble = s:cfg_dir . "/preamble.tex"
+let g:tex_preamble = cfg_dir . "/preamble.tex"
 
-" VimWiki Settings
+" Set default wiki dir
 if has("win32")
     let g:vimwiki_list = [#{path: "E:/_/Notes/wiki", html: "E:/_/Notes/wikihtml"}]
 elseif has("unix")
     let g:vimwiki_list = [#{path: "/mnt/e/_/Notes/wiki", html: "/mnt/e/_/Notes/wikihtml"}]
 endif
 
-" =============================================================================
-" === Theme ===================================================================
-" =============================================================================
-
-" Installed Themes:
-" nord: https://github.com/arcticicestudio/nord-vim/
-" onedark: https://github.com/joshdick/onedark.vim
+" Color scheme
 colorscheme onedark
 
