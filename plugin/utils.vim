@@ -10,7 +10,7 @@ command! -nargs=0 InitVim    edit $MYVIMRC
 command! -nargs=0 LoremIpsum put =LoremIpsum()
 command! -nargs=0 MRU        call MRU()
 
-" =============================================================================
+" === Implementation
 
 " Show list of recently used files, excluding /tmp/
 " files, and prompt which one to open.

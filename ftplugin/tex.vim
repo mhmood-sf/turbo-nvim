@@ -1,6 +1,6 @@
 " === TeX =====================================================================
 
-" == TeX-specific vim settings
+" === TeX-specific vim settings
 setlocal wrap
 setlocal linebreak
 setlocal conceallevel=2
@@ -18,7 +18,7 @@ command! -range -buffer -nargs=0 TeXGlance <line1>,<line2>call s:preview()
 let g:tex_viewer   = exists("g:tex_viewer") ? g:tex_viewer : ""
 let g:tex_preamble = exists("g:tex_preamble") ? g:tex_preamble : ""
 
-" =============================================================================
+" === Implementation
 
 " First arg is the file to open. If
 " no arg is given, then it uses the

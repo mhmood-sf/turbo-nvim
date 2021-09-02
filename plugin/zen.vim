@@ -1,13 +1,13 @@
 " === Zen =====================================================================
 
 " === Options
-" 0 to disable opening netrw when exiting zen
+" Open netrw when exiting zen
 let g:zen_netrw = exists('g:zen_netrw') ? g:zen_netrw : 1
 
 " === Editor commands
 command! Zen call s:zen()  " Toggle zen mode
 
-" =============================================================================
+" === Implementation
 
 let s:zen_toggle = 1
 
