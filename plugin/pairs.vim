@@ -22,7 +22,9 @@ function! CompletePair(b)
 
     " convert arg to char code
     let code = char2nr(a:b)
-    " convert line to list of char codes
+    " convert line to list of char codes,
+    " to handle utf-8 chars with longer encoding
+    " which only take a single column
     let codes = str2list(line)
     " use column number to get code for next character
     " - 1 cos 0-indexed array
@@ -32,6 +34,10 @@ function! CompletePair(b)
     return code == next ? "\<Right>" : a:b
 endfunction
 
+" When pressing <BS>, check if cursor
+" is in the middle of a pair, and delete
+" both parts if there is nothing between
+" the pair.
 function! ConsumePair()
     " get cursor position
     let pos = getpos('.')
@@ -69,17 +75,16 @@ function! s:pair(leftc_rightc)
 
     let s:pairs[leftc] = rightc
 
-    execute("inoremap " . leftc . " " . leftc . rightc . "<Left>")
+    execute("inoremap <silent> " . leftc . " " . leftc . rightc . "<Left>")
     if leftc != rightc
-        execute("inoremap " . rightc . " <C-R>=CompletePair('" . rightc . "')<CR>")
+        execute("inoremap <silent> " . rightc . " <C-R>=CompletePair('" . rightc . "')<CR>")
     endif
 endfunction
 
-inoremap <BS> <C-R>=ConsumePair()<CR>
+inoremap <silent> <BS> <C-R>=ConsumePair()<CR>
 
 call s:pair('()')
 call s:pair('{}')
 call s:pair('""')
-call s:pair('<>')
 call s:pair('[]')
 
