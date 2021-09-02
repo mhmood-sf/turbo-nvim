@@ -97,12 +97,8 @@ let g:tex_viewer   = "SumatraPDF.exe"
 let g:tex_conceal  = "d"
 let g:tex_preamble = cfg_dir . "/preamble.tex"
 
-" Set default wiki dir
-if has("win32")
-    let g:vimwiki_list = [#{path: "E:/_/Notes/wiki", html: "E:/_/Notes/wikihtml"}]
-elseif has("unix")
-    let g:vimwiki_list = [#{path: "/mnt/e/_/Notes/wiki", html: "/mnt/e/_/Notes/wikihtml"}]
-endif
+" Default vimwiki dir
+let g:vimwiki_list = [#{path: "~/_/notes/wiki", html: "~/_/notes/wikihtml"}]
 
 " Color scheme
 colorscheme onedark
