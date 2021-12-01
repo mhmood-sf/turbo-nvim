@@ -38,6 +38,9 @@ syntax on                  " Syntax highlighting
 nnoremap <Space> ;
 nnoremap <BS> ,
 
+" Enter to insert new line without leaving insert
+nnoremap <Enter> o<Esc>
+
 " Avoid having to press shift all the time
 nnoremap ; :
 
@@ -52,41 +55,13 @@ nnoremap <Down> <C-W>-
 nnoremap <Left> <C-W><
 nnoremap <Right> <C-W>>
 
+" === Other stuff =============================================================
+
 " Highlighting for ejs files
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 
-" === Plugins =================================================================
-
-" Jet configuration
-lua << EOF
-require "jet/jet"
-
--- Initialize jet
-Jet.pack { path = vim.fn.stdpath("config") , ssh = "~/.ssh/id_rsa" }
-
--- My own plugins
-local quintik = Jet.group "quintik"
-
-quintik:start {
-    "git@github.com:quintik/qline",
-    "git@github.com:quintik/Snip"
-}
-
--- Other plugins
-local jet = Jet.group "jet"
-
-jet:start {
-    "git@github.com:ervandew/supertab",
-    "git@github.com:vimwiki/vimwiki",
-    "git@github.com:neovim/nvim-lspconfig",
-    "git@github.com:nvim-treesitter/nvim-treesitter",
-    "git@github.com:joshdick/onedark.vim"
-}
-
--- Configuration for lua plugins
-require "treesitter"
-require "lsp"
-EOF
+" qline colorscheme
+let qline#color = qline#colorschemes["nord"]
 
 " Allow Snip to parse larger files
 set maxfuncdepth=200
@@ -95,11 +70,42 @@ set maxfuncdepth=200
 let g:tex_flavor   = "latex"
 let g:tex_viewer   = "SumatraPDF.exe"
 let g:tex_conceal  = "d"
-let g:tex_preamble = cfg_dir . "/preamble.tex"
+let g:tex_preamble = cfg_dir . "ftplugin/tex/preamble.tex"
 
-" Default vimwiki dir
-let g:vimwiki_list = [#{path: "~/_/notes/wiki", html: "~/_/notes/wikihtml"}]
+" === Plugins =================================================================
 
-" Color scheme
-colorscheme onedark
+lua << EOF
+require "jet/jet"
+
+-- My own plugins
+Jet.pack "quintik" {
+    "git@github.com:quintik/Snip",
+
+    -- We want to load the statusline AFTER the colorscheme,
+    -- otherwise the colorscheme overwrites the statusline colors.
+    { uri = "git@github.com:quintik/onedark-minimal",
+      cfg = function() vim.cmd("colorscheme onedark-minimal") end },
+
+    "git@github.com:quintik/qline",
+}
+
+-- Nvim stuff
+Jet.pack "nvim" {
+    { name = "treesitter",
+      uri  = "git@github.com:nvim-treesitter/nvim-treesitter",
+      cfg  = function() require "config/treesitter" end },
+
+    { name = "lspconfig",
+      uri  = "git@github.com:neovim/nvim-lspconfig",
+      opt  = true,
+      on   = { "CmdUndefined" },
+      pat  = { "LspStart" },
+      cfg  = function() require "config/lsp" end }
+}
+
+-- Misc. plugins
+Jet.pack "misc" {
+    "git@github.com:ervandew/supertab"
+}
+EOF
 
