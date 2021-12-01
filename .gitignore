@@ -7,9 +7,6 @@
 # pack plugins
 pack/
 
-# colors
-colors/
-
 # undodir
 undo/
 
@@ -18,6 +15,5 @@ lua/jet/
 
 # misc
 snip/
-preamble.tex
 .netrwhist
 
