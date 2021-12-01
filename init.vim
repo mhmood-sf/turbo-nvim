@@ -1,7 +1,4 @@
 " === init ====================================================================
-
-let cfg_dir = stdpath("config")
-
 set showmatch              " Show matching brackets
 set ignorecase             " Case insensitive matching
 set hlsearch               " Highlight search results
@@ -27,7 +24,7 @@ set ff=unix                " Use unix file endings
 
 " Save undo tree
 set undofile
-execute "set undodir=" . cfg_dir . "/undo/"
+execute "set undodir=" . stdpath("config") . "/undo/"
 
 filetype plugin indent on  " Allow autoindenting depending on filetype
 syntax on                  " Syntax highlighting
@@ -38,7 +35,7 @@ syntax on                  " Syntax highlighting
 nnoremap <Space> ;
 nnoremap <BS> ,
 
-" Enter to insert new line without leaving insert
+" Enter to insert new line without leaving normal
 nnoremap <Enter> o<Esc>
 
 " Avoid having to press shift all the time
@@ -70,7 +67,7 @@ set maxfuncdepth=200
 let g:tex_flavor   = "latex"
 let g:tex_viewer   = "SumatraPDF.exe"
 let g:tex_conceal  = "d"
-let g:tex_preamble = cfg_dir . "ftplugin/tex/preamble.tex"
+let g:tex_preamble = stdpath("config") . "ftplugin/tex/preamble.tex"
 
 " === Plugins =================================================================
 
@@ -79,14 +76,13 @@ require "jet/jet"
 
 -- My own plugins
 Jet.pack "quintik" {
-    "git@github.com:quintik/Snip",
-
     -- We want to load the statusline AFTER the colorscheme,
     -- otherwise the colorscheme overwrites the statusline colors.
     { uri = "git@github.com:quintik/onedark-minimal",
       cfg = function() vim.cmd("colorscheme onedark-minimal") end },
 
     "git@github.com:quintik/qline",
+    "git@github.com:quintik/Snip",
 }
 
 -- Nvim stuff
@@ -104,8 +100,7 @@ Jet.pack "nvim" {
 }
 
 -- Misc. plugins
-Jet.pack "misc" {
-    "git@github.com:ervandew/supertab"
-}
+Jet.pack "misc" { "git@github.com:ervandew/supertab" }
+
 EOF
 
