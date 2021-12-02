@@ -72,10 +72,13 @@ let g:tex_preamble = stdpath("config") . "ftplugin/tex/preamble.tex"
 " === Plugins =================================================================
 
 lua << EOF
-require "jet/jet"
+require "jet"
 
 -- My own plugins
 Jet.pack "quintik" {
+    { name = "jet",
+      uri  = "git@github.com:quintik/jet-nvim" },
+
     -- We want to load the statusline AFTER the colorscheme,
     -- otherwise the colorscheme overwrites the statusline colors.
     { uri = "git@github.com:quintik/onedark-minimal",
