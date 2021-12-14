@@ -16,7 +16,7 @@ set cursorline             " Highlight current line
 set notitle                " Do not set terminal title
 set nowrap                 " Do not wrap lines by default
 set laststatus=2           " Always show statusline
-set showtabline=2          " Always show tabline
+set showtabline=0          " Always show tabline
 set spelllang=en_gb        " Set spelling language
 set complete+=k            " Enable dictionary words in completion list
 set list                   " Show trailing whitespace
@@ -57,9 +57,6 @@ nnoremap <Right> <C-W>>
 " Highlighting for ejs files
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 
-" qline colorscheme
-let qline#color = qline#colorschemes["nord"]
-
 " Allow Snip to parse larger files
 set maxfuncdepth=200
 
@@ -79,13 +76,11 @@ Jet.pack "quintik" {
     { name = "jet",
       uri  = "git@github.com:quintik/jet-nvim" },
 
-    -- We want to load the statusline AFTER the colorscheme,
-    -- otherwise the colorscheme overwrites the statusline colors.
     { uri = "git@github.com:quintik/onedark-minimal",
       cfg = function() vim.cmd("colorscheme onedark-minimal") end },
 
-    "git@github.com:quintik/qline",
-    "git@github.com:quintik/Snip",
+    { uri = "git@github.com:quintik/Snip",
+      opt = true }
 }
 
 -- Nvim stuff
@@ -106,4 +101,8 @@ Jet.pack "nvim" {
 Jet.pack "misc" { "git@github.com:ervandew/supertab" }
 
 EOF
+
+set statusline=\ %n\ │\ %f\ │\ %m%r%h%=%y\ │\ %l:%c\ 
+highlight StatusLine   guifg=#91B1F1 guibg=#202020
+highlight StatusLineNC guifg=#818181 guibg=#202020
 
