@@ -1,11 +1,7 @@
 " === NETRW ===================================================================
 
 " === Custom statusline for Netrw windows
-setlocal statusline=\ 
-setlocal statusline+=%=
-setlocal statusline+=Netrw
-setlocal statusline+=%=
-setlocal statusline+=%*
+setlocal statusline=\ %=Netrw%=
 
 " === Netrw configuration
 let g:netrw_banner = 0       " Get rid of banner 

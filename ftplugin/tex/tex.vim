@@ -14,9 +14,11 @@ command! -buffer -nargs=0 TeXBuildThis call s:build(expand("%:p"))
 
 command! -range -buffer -nargs=0 TeXGlance <line1>,<line2>call s:preview()
 
-" === Custom options
-let g:tex_viewer   = exists("g:tex_viewer") ? g:tex_viewer : ""
-let g:tex_preamble = exists("g:tex_preamble") ? g:tex_preamble : ""
+" === TeX options
+let g:tex_flavor   = "latex"
+let g:tex_viewier  = "SumatraPDF.exe"
+let g:tex_conceal  = "d"
+let g:tex_preamble = stdpath("config") . "ftplugin/tex/preamble.tex"
 
 " === Implementation
 
