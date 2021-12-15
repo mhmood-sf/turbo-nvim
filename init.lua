@@ -118,8 +118,9 @@ Jet.pack "misc" {
 
 -- For some reason, this part needs to be at the end of this file.
 vim.o.statusline = " %n │ %f │ %m %r %h %= %y │ %l:%c "
-cmd "highlight StatusLine   guifg=#91B1F1 guibg=#202020"
-cmd "highlight StatusLineNC guifg=#818181 guibg=#202020"
-cmd "highlight TabLineFill  guifg=#818181 guibg=#202020"
-cmd "highlight TabLine      guifg=#818181 guibg=#202020"
-cmd "highlight TabLineSel   guifg=#91B1F1"
+cmd "highlight StatusLine   guifg=#88C0D0 guibg=#202020"
+cmd "highlight StatusLineNC guifg=#4C566A guibg=#202020"
+cmd "highlight TabLineFill  guifg=#4C566A guibg=#202020"
+cmd "highlight TabLine      guifg=#4C566A guibg=#202020"
+cmd "highlight TabLineSel   guifg=#88C0D0"
+
