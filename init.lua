@@ -4,7 +4,6 @@ local fn  = vim.fn
 local cmd = vim.cmd
 local map = vim.api.nvim_set_keymap
 
-
 --- Editor options
 ------------------
 vim.o.sm    = true    -- showmatch: show matching brackets.
@@ -30,16 +29,12 @@ vim.o.ff    = "unix"  -- fileformat: unix file endings.
 
 -- wildmode: bash-like tab completion.
 vim.o.wim = "longest,list"
-
 -- complete: enable dictionary words in completion.
 vim.opt.cpt:append { "k" }
-
 -- undodir: directory for the undofile
 vim.o.udir = fn.stdpath("config") .. "/undo/"
-
 -- detect filetypes and load filetype plugins and indent files
 fn.execute "filetype plugin indent on"
-
 -- allow syntax highlighting
 fn.execute "syntax on"
 
@@ -50,19 +45,13 @@ fn.execute "syntax on"
 -- Use space/backspace to repeat f/F/t/T motions
 map("n", "<Space>", ";", { noremap = true })
 map("n", "<BS>", ",", { noremap = true })
-
 -- Enter to insert new line without leaving normal mode
 map("n", "<Enter>", "o<Esc>", { noremap = true })
-
 -- Avoid pressing shift all the time for ex commands
 map("n", ";", ":", { noremap = true })
-
 -- Use Esc to exit terminal-insert mode
 map("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
-
--- Arrow keys for window sizes:
--- Up: increase height, Down: decrease height
--- Right: incrase width, Left: decrease width
+-- Arrow keys for window sizes
 map("n", "<Up>", "<C-W>+", { noremap = true })
 map("n", "<Down>", "<C-W>-", { noremap = true })
 map("n", "<Right>", "<C-W>>", { noremap = true })
@@ -76,6 +65,20 @@ map("n", "<Left>", "<C-W><", { noremap = true })
 cmd "autocmd BufNewFile,BufRead *.ejs set filetype=html"
 
 
+--- Mini-Plugins
+----------------
+
+-- Auto-pairs
+require "utils/pair"
+Pair.create("()")
+Pair.create("{}")
+Pair.create("[]")
+Pair.create("\"\"")
+-- Zen Mode
+require "utils/zen"
+-- Misc.
+require "utils/misc"
+
 --- Plugins
 -----------
 require "jet"
@@ -84,10 +87,8 @@ require "jet"
 Jet.pack "quintik" {
     { name = "jet",
       uri  = "git@github.com:quintik/jet-nvim" },
-
     { uri = "git@github.com:quintik/onedark-minimal",
       cfg = function() vim.cmd("colorscheme onedark-minimal") end },
-
     { uri = "git@github.com:quintik/Snip",
       opt = true,
       -- Allows Snip to parse larger files.
@@ -99,7 +100,6 @@ Jet.pack "nvim" {
     { name = "treesitter",
       uri  = "git@github.com:nvim-treesitter/nvim-treesitter",
       cfg  = function() require "config/treesitter" end },
-
     { name = "lspconfig",
       uri  = "git@github.com:neovim/nvim-lspconfig",
       opt  = true,
@@ -109,14 +109,12 @@ Jet.pack "nvim" {
 }
 
 -- Misc. plugins
-Jet.pack "misc" {
-    "git@github.com:ervandew/supertab"
-}
+Jet.pack "misc" { "git@github.com:ervandew/supertab" }
 
 --- Custom statusline
 ---------------------
 
--- For some reason, this part needs to be at the end of this file.
+-- Needs to be loaded AFTER colorscheme.
 vim.o.statusline = " %n │ %f │ %m %r %h %= %y │ %l:%c "
 cmd "highlight StatusLine   guifg=#88C0D0 guibg=#202020"
 cmd "highlight StatusLineNC guifg=#4C566A guibg=#202020"
