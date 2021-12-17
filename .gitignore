@@ -10,10 +10,7 @@ pack/
 # undodir
 undo/
 
-# lua plugins
-lua/jet/
-
 # misc
-snip/
+abby/
 .netrwhist
 
