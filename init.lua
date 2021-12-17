@@ -87,12 +87,11 @@ require "jet"
 Jet.pack "quintik" {
     { name = "jet",
       uri  = "git@github.com:quintik/jet-nvim" },
-    { uri = "git@github.com:quintik/onedark-minimal",
-      cfg = function() vim.cmd("colorscheme onedark-minimal") end },
-    { uri = "git@github.com:quintik/Snip",
-      opt = true,
-      -- Allows Snip to parse larger files.
-      cfg = function() vim.o.maxfuncdepth = 200 end }
+    { uri  = "git@github.com:quintik/onedark-minimal",
+      cfg  = function() vim.cmd("colorscheme onedark-minimal") end },
+    { name = "abby",
+      uri  = "git@github.com:quintik/abby-nvim",
+      opt  = true }
 }
 
 -- Nvim stuff
