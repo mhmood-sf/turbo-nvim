@@ -32,7 +32,7 @@ vim.o.wim = "longest,list"
 -- complete: enable dictionary words in completion.
 vim.opt.cpt:append { "k" }
 -- undodir: directory for the undofile
-vim.o.udir = fn.stdpath("config") .. "/undo/"
+vim.o.udir = fn.stdpath("data") .. "/undo/"
 -- detect filetypes and load filetype plugins and indent files
 fn.execute "filetype plugin indent on"
 -- allow syntax highlighting
