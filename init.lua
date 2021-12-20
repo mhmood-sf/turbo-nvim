@@ -62,65 +62,23 @@ map("n", "<Left>", "<C-W><", { noremap = true })
 
 
 --- Autocmds
-------------
 
 -- Highlight ejs files as HTML.
 cmd "autocmd BufNewFile,BufRead *.ejs set filetype=html"
 
 
+--- Plugins
+require "jet-config"
+
+
 --- Mini-Plugins
-----------------
 
 -- Auto-pairs
-require "utils/pair"
-Pair.create("()")
-Pair.create("{}")
-Pair.create("[]")
-Pair.create("\"\"")
+require("utils.pair").create { "()", "{}", "[]", "\"\"" }
 -- Zen Mode
-require "utils/zen"
+require "utils.zen"
 -- Misc.
-require "utils/misc"
-
---- Plugins
------------
-require "jet"
-
--- Own plugins
-Jet.pack "quintik" {
-    { name = "jet",
-      uri  = "git@github.com:quintik/jet-nvim" },
-    { uri  = "git@github.com:quintik/onedark-minimal",
-      cfg  = function() vim.cmd("colorscheme onedark-minimal") end },
-    { name = "abby",
-      uri  = "git@github.com:quintik/abby-nvim",
-      opt  = true }
-}
-
--- Nvim stuff
-Jet.pack "nvim" {
-    { name = "treesitter",
-      uri  = "git@github.com:nvim-treesitter/nvim-treesitter",
-      cfg  = function() require "config/treesitter" end },
-    { name = "lspconfig",
-      uri  = "git@github.com:neovim/nvim-lspconfig",
-      opt  = true,
-      on   = { "CmdUndefined" },
-      pat  = { "LspStart" },
-      cfg  = function() require "config/lsp" end }
-}
-
--- Misc. plugins
-Jet.pack "misc" { "git@github.com:ervandew/supertab" }
-
---- Custom statusline
----------------------
-
--- Needs to be loaded AFTER colorscheme.
-vim.o.statusline = " %n │ %f │ %m %r %h %= %y │ %l:%c "
-cmd "highlight StatusLine   guifg=#88C0D0 guibg=#202020"
-cmd "highlight StatusLineNC guifg=#4C566A guibg=#202020"
-cmd "highlight TabLineFill  guifg=#4C566A guibg=#202020"
-cmd "highlight TabLine      guifg=#4C566A guibg=#202020"
-cmd "highlight TabLineSel   guifg=#88C0D0"
+require "utils.misc"
+-- Statusline
+require "utils.stline"
 
