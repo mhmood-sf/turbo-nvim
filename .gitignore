@@ -1,15 +1,3 @@
-# to keep it small, stuff that is
-# already specified in init.vim
-# like pack plugins/colors/etc
-# which already have their own repo
-# are ignored.
-
-# pack plugins
-pack/
-
-# undodir
-undo/
-
 # misc
 abby/
 .netrwhist
