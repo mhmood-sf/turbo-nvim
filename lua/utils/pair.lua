@@ -79,14 +79,14 @@ local function delete()
     end
 end
 
-local function create(leftright)
+local function create_pair(leftright)
     local left  = vim.split(leftright, "")[1]
     local right = vim.split(leftright, "")[2]
     pairs[left] = right
 
     -- Expand left char to full pair.
-    local evalstr = "'Pair.insert(" .. fn.char2nr(left) .. ")'"
-    map("i", left, "<C-R>=luaeval(" .. evalstr .. ")<CR>", {
+    local s = "'require\"utils.pair\".insert(" .. fn.char2nr(left) .. ")'"
+    map("i", left, "<C-R>=luaeval(" .. s .. ")<CR>", {
         noremap = false,
         silent  = true
     })
@@ -95,21 +95,27 @@ local function create(leftright)
     -- previous.
     if left ~= right then
         -- Skip right char of a pair.
-        local evalstr = "'Pair.skip(" .. fn.char2nr(right) .. ")'"
-        map("i", right, "<C-R>=luaeval(" .. evalstr .. ")<CR>", {
+        local s = "'require\"utils.pair\".skip(" .. fn.char2nr(right) .. ")'"
+        map("i", right, "<C-R>=luaeval(" .. s .. ")<CR>", {
             noremap = false,
             silent  = true
         })
     end
 end
 
+local function create(tbl)
+    for _, leftright in ipairs(tbl) do
+        create_pair(leftright)
+    end
+end
+
 -- <BS> between a pair deletes both chars.
-map("i", "<BS>", "<C-R>=luaeval('Pair.delete()')<CR>", {
+map("i", "<BS>", "<C-R>=luaeval('require\"utils.pair\".delete()')<CR>", {
     noremap = false,
     silent  = true
 })
 
-Pair = {
+return {
     insert = insert,
     delete = delete,
     skip   = skip,
