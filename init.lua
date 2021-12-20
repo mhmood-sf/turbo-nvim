@@ -42,6 +42,9 @@ fn.execute "syntax on"
 --- Mappings
 ------------
 
+-- Use space as leader.
+vim.g.mapleader = " "
+
 -- Use space/backspace to repeat f/F/t/T motions
 map("n", "<Space>", ";", { noremap = true })
 map("n", "<BS>", ",", { noremap = true })
