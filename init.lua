@@ -4,8 +4,10 @@ local fn  = vim.fn
 local cmd = vim.cmd
 local map = vim.api.nvim_set_keymap
 
+--[
 --- Editor options
-------------------
+--]
+
 vim.o.sm    = true    -- showmatch: show matching brackets.
 vim.o.ic    = true    -- ignorecase: case-insensitive matching.
 vim.o.hls   = true    -- hlsesarch: highlight search results.
@@ -38,9 +40,9 @@ fn.execute "filetype plugin indent on"
 -- allow syntax highlighting
 fn.execute "syntax on"
 
-
---- Mappings
-------------
+--[
+--- Mappings 
+--]
 
 -- Use space as leader.
 vim.g.mapleader = " "
@@ -60,18 +62,22 @@ map("n", "<Down>", "<C-W>-", { noremap = true })
 map("n", "<Right>", "<C-W>>", { noremap = true })
 map("n", "<Left>", "<C-W><", { noremap = true })
 
-
+--[
 --- Autocmds
+--]
 
 -- Highlight ejs files as HTML.
 cmd "autocmd BufNewFile,BufRead *.ejs set filetype=html"
 
-
+--[
 --- Plugins
+--]
+
 require "jet-config"
 
-
+--[
 --- Mini-Plugins
+--]
 
 -- Auto-pairs
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
