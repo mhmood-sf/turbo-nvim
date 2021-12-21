@@ -16,7 +16,7 @@ command! -range -buffer -nargs=0 TeXGlance <line1>,<line2>call s:preview()
 
 " === TeX options
 let g:tex_flavor   = "latex"
-let g:tex_viewier  = "SumatraPDF.exe"
+let g:tex_viewer  = "SumatraPDF.exe"
 let g:tex_conceal  = "d"
 let g:tex_preamble = stdpath("config") . "ftplugin/tex/preamble.tex"
 
