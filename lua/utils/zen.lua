@@ -1,6 +1,6 @@
 --- Zen Mode Mini-Plugin
 
-vim.cmd "command! Zen lua Zen.toggle()"
+vim.cmd "command! Zen lua require'utils.zen'.toggle()"
 
 local disabled = true
 
@@ -23,5 +23,5 @@ local function toggle()
     end
 end
 
-Zen = { toggle = toggle }
+return { toggle = toggle }
 
