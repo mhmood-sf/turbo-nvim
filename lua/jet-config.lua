@@ -20,8 +20,7 @@ Jet.pack "nvim" {
     { name = "lspconfig",
       uri  = "git@github.com:neovim/nvim-lspconfig",
       opt  = true,
-      on   = { "CmdUndefined" },
-      pat  = { "LspStart" },
+      on   = { "CmdUndefined LspStart" },
       cfg  = function() require "config.lsp" end }
 }
 
