@@ -41,21 +41,18 @@ fn.execute "filetype plugin indent on"
 fn.execute "syntax on"
 
 --[
---- Mappings 
+--- Mappings
 --]
 
 -- Use space as leader.
-vim.g.mapleader = " "
+vim.g.mapleader = "\\"
 
--- Use space/backspace to repeat f/F/t/T motions
-map("n", "<Space>", ";", { noremap = true })
-map("n", "<BS>", ",", { noremap = true })
 -- Enter to insert new line without leaving normal mode
 map("n", "<Enter>", "o<Esc>", { noremap = true })
 -- Avoid pressing shift all the time for ex commands
 map("n", ";", ":", { noremap = true })
--- Use Esc to exit terminal-insert mode
-map("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
+-- Use F1 to exit terminal-insert mode
+map("t", "<F1>", "<C-\\><C-n>", { noremap = true })
 -- Arrow keys for window sizes
 map("n", "<Up>", "<C-W>+", { noremap = true })
 map("n", "<Down>", "<C-W>-", { noremap = true })
@@ -83,8 +80,9 @@ require "jet-config"
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
 -- Zen Mode
 require "utils.zen"
--- Misc.
-require "utils.misc"
 -- Statusline
 require "utils.stline"
-
+-- Terminal
+require "utils.term"
+-- Misc.
+require "utils.misc"
