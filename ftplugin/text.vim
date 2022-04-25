@@ -1,6 +1,4 @@
-" === Text ====================================================================
-
-setlocal spell
-setlocal wrap
-setlocal linebreak
+setlocal spell     " Highlight spelling errors
+setlocal wrap      " Wrap long lines
+setlocal linebreak " Wrap lines at sane points
 
