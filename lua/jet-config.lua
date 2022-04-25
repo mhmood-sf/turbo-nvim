@@ -8,7 +8,11 @@ Jet.pack "quintik" {
     "git@github.com:quintik/abby-nvim",
 
     { uri  = "git@github.com:quintik/onedark-minimal",
-      cfg  = function() vim.cmd("colorscheme onedark-minimal") end },
+      cfg  =
+        function()
+            vim.g.onedark_contrast = true
+            vim.cmd "colorscheme onedark-minimal"
+        end }
 }
 
 -- Nvim stuff
@@ -26,6 +30,6 @@ Jet.pack "nvim" {
 
 -- Misc. plugins
 Jet.pack "misc" {
-    "git@github.com:ervandew/supertab"
+    "git@github.com:ervandew/supertab",
 }
 
