@@ -1,8 +1,7 @@
-" === TeX =====================================================================
-
 " === TeX-specific vim settings
 setlocal wrap
 setlocal linebreak
+setlocal textwidth=0
 setlocal conceallevel=2
 
 " === Custom editor commands
@@ -16,17 +15,13 @@ command! -range -buffer -nargs=0 TeXGlance <line1>,<line2>call s:preview()
 
 " === TeX options
 let g:tex_flavor   = "latex"
-let g:tex_viewer  = "SumatraPDF.exe"
-let g:tex_conceal  = "d"
+let g:tex_viewer   = "zathura"
 let g:tex_preamble = stdpath("config") . "ftplugin/tex/preamble.tex"
 
-" === Implementation
-
-" First arg is the file to open. If
-" no arg is given, then it uses the
-" main doc. If no main doc is set,
-" then it defaults to the current
-" buffer.
+" First arg is the file to open. If no arg
+" is given, then it uses the main doc. If
+" no main doc is set, then it defaults to
+" the current buffer.
 function! s:open(...) abort
     if g:tex_viewer ==# ""
         echo "No viewer set!"
@@ -43,16 +38,15 @@ function! s:open(...) abort
 
     " Get the outpath for the file and change extension to pdf
     let l:file = fnamemodify(l:fpath, ":s?src?out?:rp") . ".pdf"
-    let l:cmd  = g:tex_viewer . " " . l:file
+    let l:cmd  = g:tex_viewer . " " . shellescape(l:file)
 
     call jobstart(l:cmd, {"detach": 1})
 endfunction
 
-" First arg is the file to build. If
-" no arg is given, then it uses the
-" main doc. If no main doc is set,
-" then it defaults to the current
-" buffer.
+" First arg is the file to build. If no arg
+" is given, then it uses the main doc. If
+" no main doc is set, then it defaults to
+" the current buffer.
 function! s:build(...) abort
     if a:0 > 0
         let l:fpath = a:1
@@ -62,17 +56,17 @@ function! s:build(...) abort
         let l:fpath = expand("%:p")
     endif
 
-    " Get source file absolute path (and remove extension)
+    " source file's absolute path (without extension)
     let l:srcfile = fnamemodify(l:fpath, ":p")
-    " Replace src/ with out/ (and remove filename)
+    " output directory (replaces src/ with out/)
     let l:outpath = fnamemodify(l:fpath, ":s?src?out?:hp")
     " Make sure the out directory exists
     call mkdir(l:outpath, "p")
 
     let l:exe = "pdflatex"
-    let l:out = " -output-directory " . l:outpath
+    let l:out = " -output-directory " . shellescape(l:outpath)
 
-    let l:cmd = l:exe . l:out . " " . l:srcfile
+    let l:cmd = l:exe . l:out . " " . shellescape(l:srcfile)
 
     echo "Compiling..."
     let l:output = split(system(l:cmd), "\n")
