@@ -1,4 +1,4 @@
-# turbo-octo
+# turbo-nvim
 
 My neovim configuration! :D
 
