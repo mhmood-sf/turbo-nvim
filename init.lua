@@ -61,16 +61,16 @@ map("n", "<Left>",  "<C-W><", opts)
 
 -- H: First non-blank char of line.
 -- L: Last character of line.
-map("n", "<C-h>", "z.",     opts)
-map("n", "<C-l>", "$zz",    opts)
+map("n", "<S-h>", "^zz",     opts)
+map("n", "<S-l>", "$zz",    opts)
 
 -- J: Scroll downwards based on 'scroll' option
 -- K: Scroll upwards based on 'scroll' option
-map("n", "<C-j>", "<C-d>M", opts)
-map("n", "<C-k>", "<C-u>M", opts)
+map("n", "<S-j>", "<C-d>M", opts)
+map("n", "<S-k>", "<C-u>M", opts)
 
--- Space to clear search highlighting
-map("n", "<Space>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
+-- <Esc> to clear search highlighting
+map("n", "<Esc>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
 
 
 --[ Autocmds ]--
