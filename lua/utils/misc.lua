@@ -5,7 +5,7 @@ command! -nargs=0 InitLua    edit $MYVIMRC
 command! -nargs=0 BufClean   lua require'utils/misc'.bufclean()
 command! -nargs=0 LoremIpsum echo luaeval("require'utils/misc'.loremipsum()")
 command! -nargs=0 TODO       exe "edit " . stdpath("data") . "/TODO.md"
-command! -nargs=0 Term       split | wincmd j | setlocal nonumber | terminal
+command! -nargs=0 Term       split | wincmd j | terminal
 ]]
 
 local function bufclean()
