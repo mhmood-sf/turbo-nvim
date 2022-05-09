@@ -1,7 +1,6 @@
 --- Custom statusline
 
 --[[
-
 local catppuccin = {
      FLAMINGO  = "#F2CDCD",  MAUVE     = "#DDB6F2",
      PINK      = "#F5C2E7",  MAROON    = "#E8A2AF",
@@ -15,13 +14,12 @@ local catppuccin = {
      BLACK3    = "#302D41",  BLACK2    = "#1E1E2E",
      BLACK1    = "#1A1826",  BLACK0    = "#161320"
 }
-
 --]]
 
 -- Note that it must be loaded AFTER colorscheme,
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
-vim.o.statusline = " %f %#StatusLineNC# %m%r%h %= %Y ┃ %P ┃ %l:%c "
+vim.o.statusline = "%{getbufvar(bufnr(), '&mod') ? '  ●' : ''} %f %#StatusLineNC#%{g:actual_curbuf == bufnr() ? '' : ''} %= %Y  %P  %l:%c %q%r%h"
 vim.cmd "highlight StatusLine   guifg=#161320 guibg=#DDB6F2"
 vim.cmd "highlight StatusLineNC guifg=#DDB6F2 guibg=#1E1E2E"
 
