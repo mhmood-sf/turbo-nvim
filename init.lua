@@ -69,6 +69,12 @@ map("n", "<S-l>", "$zz",    opts)
 map("n", "<S-j>", "<C-d>M", opts)
 map("n", "<S-k>", "<C-u>M", opts)
 
+-- <C-hjkl> for splits!
+map("n", "<C-h>", ":vsplit<CR>", opts)
+map("n", "<C-k>", ":split<CR>", opts)
+map("n", "<C-l>", ":vsplit<CR><C-w>l", opts)
+map("n", "<C-j>", ":split<CR><C-w>j", opts)
+
 -- <Esc> to clear search highlighting
 map("n", "<Esc>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
 
