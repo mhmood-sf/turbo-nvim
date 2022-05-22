@@ -20,11 +20,12 @@ local catppuccin = {
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
 vim.o.statusline = "%{getbufvar(bufnr(), '&mod') ? '  ●' : ''} %f %#StatusLineNC#%{g:actual_curbuf == bufnr() ? '' : ''} %= %Y  %P  %l:%c %q%r%h"
-vim.cmd "highlight StatusLine   guifg=#161320 guibg=#DDB6F2"
-vim.cmd "highlight StatusLineNC guifg=#DDB6F2 guibg=#1E1E2E"
+vim.cmd "highlight StatusLine   guifg=#161320 guibg=#BD93F9"
+vim.cmd "highlight StatusLineNC guifg=#BD93F9 guibg=#1E1E2E"
 
-vim.cmd "highlight TabLineSel   guifg=#161320 guibg=#DDB6F2"
-vim.cmd "highlight TabLine      guifg=#D9E0EE"
+vim.cmd "highlight TabLine      guifg=#BD93F9 guibg=#1E1E2E"
+vim.cmd "highlight TabLineSel   guifg=#1E1E2E guibg=#BD93F9"
+vim.cmd "highlight TabLineFill  guifg=#BD93F9 guibg=#1E1E2E"
 
 --[[
 default_value = {
