@@ -10,6 +10,7 @@ vim.o.et    = true    -- expandtab: Convert tabs to whitespace.
 vim.o.ai    = true    -- autoindent: Indent new lines the same as previous.
 vim.o.nu    = true    -- number: Show line numbers.
 vim.o.ru    = true    -- ruler: Show cursor position in default statusline.
+vim.o.lz    = true    -- lazyredraw: Postpone redraws for various commands.
 vim.o.hls   = true    -- hlsesarch: Highlight search results.
 vim.o.tgc   = true    -- termguicolors: Use gui colors in terminal.
 vim.o.udf   = true    -- undofile: Save undo tree for persistent undo's.
@@ -79,17 +80,18 @@ map("n", "<C-j>", ":split<CR><C-w>j", opts)
 -- <Esc> to clear search highlighting
 map("n", "<Esc>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
 
-
 --[ Autocmds ]--
 cmd "autocmd BufNewFile,BufRead *.ejs set syntax=html"
 cmd "autocmd BufNewFile,BufRead *.sty set syntax=tex"
 cmd "autocmd BufNewFile,BufRead *.cls set syntax=tex"
+
+--[ Editor Commands ]--
+cmd "command! -nargs=0 InitLua edit $MYVIMRC"
+cmd "command! -nargs=0 TODO    exe 'edit ' . stdpath('data') . '/TODO.md'"
 
 --[ Plugins ]--
 require "jet-config"
 
 --[ Mini-Plugins ]--
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
-require "utils.stline"
-require "utils.misc"
-require "utils.zen"
+require "utils.stline-mini"

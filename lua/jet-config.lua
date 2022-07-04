@@ -32,4 +32,3 @@ Jet.pack "nvim" {
 Jet.pack "misc" {
     "git@github.com:ervandew/supertab",
 }
-
