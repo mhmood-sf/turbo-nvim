@@ -12,7 +12,8 @@ Jet.pack "quintik" {
         function()
             vim.g.onedark_contrast = true
             vim.cmd "colorscheme onedark-minimal"
-        end }
+        end
+    }
 }
 
 -- Nvim stuff
