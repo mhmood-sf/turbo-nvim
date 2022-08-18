@@ -7,13 +7,18 @@ Jet.pack "quintik" {
     "git@github.com:quintik/jet-nvim",
     "git@github.com:quintik/abby-nvim",
 
-    { uri  = "git@github.com:quintik/onedark-minimal",
-      cfg  =
+    { uri = "git@github.com:quintik/onedark-minimal",
+      opt = true,
+      cfg =
         function()
             vim.g.onedark_contrast = true
             vim.cmd "colorscheme onedark-minimal"
         end
-    }
+    },
+
+    { uri = "git@github.com:quintik/aks-nvim",
+      opt = false,
+      cfg = function() vim.cmd "colorscheme aks" end }
 }
 
 -- Nvim stuff

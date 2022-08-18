@@ -15,12 +15,12 @@ vim.o.hls   = true    -- hlsesarch: Highlight search results.
 vim.o.tgc   = true    -- termguicolors: Use gui colors in terminal.
 vim.o.udf   = true    -- undofile: Save undo tree for persistent undo's.
 vim.o.list  = true    -- list: Show trailing whitespace.
+vim.o.cul   = true    -- cursorline: Highlight current line.
 
-vim.o.cul   = false   -- cursorline: Don't highlight current line.
 vim.o.title = false   -- title: Don't set terminal title.
 vim.o.wrap  = false   -- wrap: Dont wrap lines.
 
-vim.o.ls    = 2       -- laststatus: Always show statusline.
+vim.o.ls    = 0       -- laststatus: Never show statusline.
 vim.o.sts   = 4       -- softtabstop: 4 spaces as one tab.
 vim.o.ts    = 4       -- tabstop: Number of cols in one tab char.
 vim.o.sw    = 4       -- shiftwidth: Autoindent width.
@@ -81,9 +81,15 @@ map("n", "<C-j>", ":split<CR><C-w>j", opts)
 map("n", "<Esc>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
 
 --[ Autocmds ]--
+
+-- Filetype detection
 cmd "autocmd BufNewFile,BufRead *.ejs set syntax=html"
 cmd "autocmd BufNewFile,BufRead *.sty set syntax=tex"
 cmd "autocmd BufNewFile,BufRead *.cls set syntax=tex"
+
+-- Set cursorline for active window
+cmd "autocmd WinEnter * set cul"
+cmd "autocmd WinLeave * set nocul"
 
 --[ Editor Commands ]--
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
@@ -95,3 +101,4 @@ require "jet-config"
 --[ Mini-Plugins ]--
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
 require "utils.stline-mini"
+require "utils.vault"
