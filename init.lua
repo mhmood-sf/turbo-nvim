@@ -20,7 +20,7 @@ vim.o.cul   = true    -- cursorline: Highlight current line.
 vim.o.title = false   -- title: Don't set terminal title.
 vim.o.wrap  = false   -- wrap: Dont wrap lines.
 
-vim.o.ls    = 0       -- laststatus: Never show statusline.
+vim.o.ls    = 1       -- laststatus: Show statusline only when needed.
 vim.o.sts   = 4       -- softtabstop: 4 spaces as one tab.
 vim.o.ts    = 4       -- tabstop: Number of cols in one tab char.
 vim.o.sw    = 4       -- shiftwidth: Autoindent width.
@@ -29,17 +29,10 @@ vim.o.cc    = "80"    -- colorcolumn: Highlight col to help align text.
 vim.o.ff    = "unix"  -- fileformat: Unix file endings.
 vim.o.spl   = "en_gb" -- spelllang: Set spelling language.
 
--- complete: Enable dictionary words in completion.
-vim.opt.cpt:append { "k" }
 -- wildmode: Bash-like tab completion.
 vim.o.wim = "longest,list"
 -- undodir: Directory for the undofile
 vim.o.udir = fn.stdpath("data") .. "/undo/"
-
--- Detect filetypes and load filetype plugins and indent files
-fn.execute "filetype plugin indent on"
--- Allow syntax highlighting
-fn.execute "syntax on"
 
 --[ Mappings ]--
 vim.g.mapleader = " "
@@ -61,8 +54,8 @@ map("n", "<Down>",  "<C-W>-", opts)
 map("n", "<Right>", "<C-W>>", opts)
 map("n", "<Left>",  "<C-W><", opts)
 
--- H: First non-blank char of line.
--- L: Last character of line.
+-- H: First non-blank char of line + center cursorline.
+-- L: Last character of line + center cursorline.
 map("n", "<S-h>", "^zz",     opts)
 map("n", "<S-l>", "$zz",    opts)
 
@@ -80,6 +73,8 @@ map("n", "<C-j>", ":split<CR><C-w>j", opts)
 -- <Esc> to clear search highlighting
 map("n", "<Esc>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
 
+--[[ Turned off because they seem to be slowing down startup time a bit!
+
 --[ Autocmds ]--
 
 -- Filetype detection
@@ -90,15 +85,15 @@ cmd "autocmd BufNewFile,BufRead *.cls set syntax=tex"
 -- Set cursorline for active window
 cmd "autocmd WinEnter * set cul"
 cmd "autocmd WinLeave * set nocul"
+--]]
 
 --[ Editor Commands ]--
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
-cmd "command! -nargs=0 TODO    exe 'edit ' . stdpath('data') . '/TODO.md'"
 
 --[ Plugins ]--
 require "jet-config"
 
 --[ Mini-Plugins ]--
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
-require "utils.stline-mini"
 require "utils.vault"
+require "utils.stline"
