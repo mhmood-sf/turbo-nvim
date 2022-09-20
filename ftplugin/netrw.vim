@@ -1,5 +1,5 @@
 " Custom statusline for Netrw windows
-setlocal statusline=\ %=Netrw%=
+setlocal statusline=\ %#StatusLineNC#\ %=\ %#StatusLineInv#\ Netrw\ %#StatusLineNC#\ %=
 setlocal colorcolumn=""      " disable color column
 
 nnoremap <buffer> nf <Plug>NetrwOpenFile
@@ -9,4 +9,3 @@ nmap <buffer> nd d
 nnoremap <buffer> <BS> <Plug>NetrwBrowseUpDir
 nnoremap <buffer> h <Plug>NetrwBrowseUpDir
 nnoremap <buffer> l <Plug>NetrwLocalBrowseCheck
-
