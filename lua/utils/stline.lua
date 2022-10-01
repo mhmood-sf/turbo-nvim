@@ -3,7 +3,7 @@
 -- Note that it must be loaded AFTER colorscheme,
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
-vim.o.statusline = "%{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %} %{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %f %#StatusLineNC#%{g:actual_curwin == win_getid() ? '' : ''} %= %Y  %P  %l:%c %q%r%h"
+vim.o.statusline = "%{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %} %{getbufvar(bufnr(), '&mod') ? '●' : ''} %f %#StatusLineNC#%{g:actual_curwin == win_getid() ? '' : ''} %= %Y  %P  %l:%c %q%r%h"
 vim.cmd "highlight StatusLine    guifg=#FC56B1 guibg=#17171C"
 vim.cmd "highlight StatusLineInv guifg=#17171C guibg=#FC56B1"
 vim.cmd "highlight StatusLineNC  guifg=#FC56B1 guibg=#17171C"
