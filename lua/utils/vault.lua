@@ -1,4 +1,4 @@
-local VAULT_PATH = os.getenv("HOME") .. "/Personal/Vault"
+local VAULT_PATH = os.getenv("HOME") .. "/Vault"
 local INBOX_PATH = VAULT_PATH .. "/INBOX"
 local TASKS_FILE = VAULT_PATH .. "/Life/tasks.txt"
 local REFS_PATH  = VAULT_PATH .. "/Life/references"
@@ -37,8 +37,8 @@ local function new_today_note()
     vim.cmd "normal G$a"
 end
 
-local function new_pending_task()
-    local date = vim.fn.strftime("%d-%m-%Y")
+local function new_life_task()
+    local date = vim.fn.strftime("%Y-%m-%d")
     local time = vim.fn.strftime("%H:%M")
 
     vim.fn.writefile({
@@ -84,11 +84,11 @@ local function new_life_ref()
 end
 
 vim.cmd "command! Note lua require\"utils.vault\".new_today_note()"
-vim.cmd "command! Task lua require\"utils.vault\".new_pending_task()"
+vim.cmd "command! Task lua require\"utils.vault\".new_life_task()"
 vim.cmd "command! Ref  lua require\"utils.vault\".new_life_ref()"
 
 return {
     new_life_ref = new_life_ref,
     new_today_note = new_today_note,
-    new_pending_task = new_pending_task
+    new_life_task = new_life_task
 }
