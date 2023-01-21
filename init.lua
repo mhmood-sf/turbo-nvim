@@ -34,6 +34,10 @@ vim.o.wim = "longest,list"
 -- undodir: Directory for the undofile
 vim.o.udir = fn.stdpath("data") .. "/undo/"
 
+-- See `:h ft-tex-plugin`
+vim.g.tex_flavor = "latex"
+
+
 --[ Mappings ]--
 vim.g.mapleader = " "
 
@@ -45,8 +49,8 @@ map("n", "<Enter>", "o<Esc>", opts)
 -- Avoid pressing shift all the time for ex commands
 map("n", ";", ":", opts)
 
--- Use F1 to exit terminal-insert mode
-map("t", "<F1>", "<C-\\><C-n>", opts)
+-- Use Esc to exit terminal-insert mode
+map("t", "<Esc>", "<C-\\><C-n>", opts)
 
 -- Arrow keys for window sizes
 map("n", "<Up>",    "<C-W>+", opts)
