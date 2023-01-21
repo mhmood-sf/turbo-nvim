@@ -1,0 +1,79 @@
+abbr template {
+\documentclass{article}<CR><CR>
+
+\usepackage{xcolor,graphicx,amsmath,amssymb,amsthm,mathtools,geometry}<CR><CR>
+
+\usepackage{hyperref}<CR><CR>
+
+\geometry{<CR>
+margin=1in,<CR>
+headheight=\baselineskip,<CR>
+headsep=\baselineskip,<CR>
+heightrounded<CR>
+}<CR><CR>
+
+\hypersetup{<CR>
+pdfstartview={XYZ null null 1.00},<CR>
+colorlinks=true,<CR>
+urlcolor=cyan,<CR>
+linkcolor=cyan<CR>
+}<CR><CR>
+
+\setlength{\parskip}{1em}<CR>
+\setlength{\parindent}{0pt}<CR><CR>
+
+\newcommand{\N}{\mathbb{N}}<CR>
+\newcommand{\Z}{\mathbb{Z}}<CR>
+\newcommand{\Q}{\mathbb{Q}}<CR>
+\newcommand{\R}{\mathbb{R}}<CR>
+\newcommand{\C}{\mathbb{C}}<CR>
+\newcommand{\F}{\mathbb{F}}<CR><CR>
+
+\newcommand{\info}[3]{{\parindent=0pt\textbf{#1 \hfill #2}} \\ \vspace{-5pt} \hrule}<CR><CR>
+
+\begin{document}<CR><CR>
+
+\end{document}<Esc>ki<C-R>=Eat()<CR>
+}
+
+abbr enum {
+\begin{enumerate}<CR>
+\item<CR>
+\end{enumerate}<Esc>k$a
+}
+
+abbr item {
+\begin{itemize}<CR>
+\item<CR>
+\end{itemize}<Esc>k$a
+}
+
+abbr align1 {
+\begin{align*}<CR><CR>
+
+\end{align*}<Esc>ka<C-R>=Eat()<CR>
+}
+
+abbr align {
+\begin{align*}<CR><CR>
+
+\end{align*}<Esc>ka<C-R>=Eat()<CR>
+}
+
+abbr center {
+\begin{center}<CR><CR>
+
+\end{center}<Esc>ka<C-R>=Eat()<CR>
+}
+
+abbr sec {
+\section{}<Esc>i<C-R>=Eat()<Cr>
+}
+
+abbr sub {
+\subsection{}<Esc>i<C-R>=Eat()<Cr>
+}
+
+abbr ssub {
+\subsubsection{}<Esc>i<C-R>=Eat()<Cr>
+}
