@@ -20,7 +20,7 @@ vim.o.cul   = true    -- cursorline: Highlight current line.
 vim.o.title = false   -- title: Don't set terminal title.
 vim.o.wrap  = false   -- wrap: Dont wrap lines.
 
-vim.o.ls    = 1       -- laststatus: Show statusline only when needed.
+vim.o.ls    = 3       -- laststatus: Show statusline only when needed.
 vim.o.sts   = 4       -- softtabstop: 4 spaces as one tab.
 vim.o.ts    = 4       -- tabstop: Number of cols in one tab char.
 vim.o.sw    = 4       -- shiftwidth: Autoindent width.
@@ -101,3 +101,8 @@ require "jet-config"
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
 require "utils.vault"
 require "utils.stline"
+
+--[ Netrw ]--
+vim.g.netrw_preview = 1
+vim.g.newtrw_liststyle = 3
+vim.g.netrw_winsize = 20

@@ -1,16 +1,16 @@
 --- Custom statusline
-
+ 
 -- Note that it must be loaded AFTER colorscheme,
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
-vim.o.statusline = "%{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %} %{getbufvar(bufnr(), '&mod') ? '●' : ''} %f %#StatusLineNC#%{g:actual_curwin == win_getid() ? '' : ''} %= %Y  %P  %l:%c %q%r%h"
-vim.cmd "highlight StatusLine    guifg=#FC56B1 guibg=#17171C"
-vim.cmd "highlight StatusLineInv guifg=#17171C guibg=#FC56B1"
-vim.cmd "highlight StatusLineNC  guifg=#FC56B1 guibg=#17171C"
+vim.o.statusline = "%#StatusLineInv# %{toupper(mode())} %#StatusLine# %= %Y ┃ %P ┃ %l:%c %q%r%h█"
+vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %f %#StatusLineNC# %="
+vim.cmd "highlight StatusLine    guifg=#5596F7 guibg=#222430"
+vim.cmd "highlight StatusLineInv guifg=#222430 guibg=#5596F7"
 
-vim.cmd "highlight TabLine      guifg=#FC56B1 guibg=#222430"
-vim.cmd "highlight TabLineSel   guifg=#222430 guibg=#FC56B1"
-vim.cmd "highlight TabLineFill  guifg=#FC56B1 guibg=#222430"
+vim.cmd "highlight TabLine      guifg=#5596F7 guibg=#222430"
+vim.cmd "highlight TabLineSel   guifg=#222430 guibg=#5596F7"
+vim.cmd "highlight TabLineFill  guifg=#5596F7 guibg=#222430"
 
 --[[
 local symbol = {
@@ -35,4 +35,9 @@ local symbol = {
     right_rounded_thin = '',
     circle = '●',
 }
+
+local misc = "                                    "
+
+
+
 --]]
