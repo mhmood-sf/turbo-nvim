@@ -42,6 +42,12 @@ abbr enum {
 \end{enumerate}<Esc>k$a
 }
 
+abbr enuma {
+\begin{enumerate}[label=(\alph*)]<CR>
+\item<CR>
+\end{enumerate}<Esc>k$a
+}
+
 abbr item {
 \begin{itemize}<CR>
 \item<CR>
@@ -67,13 +73,45 @@ abbr center {
 }
 
 abbr sec {
-\section{}<Esc>i<C-R>=Eat()<Cr>
+\section{}<Esc>i<C-R>=Eat()<CR>
 }
 
 abbr sub {
-\subsection{}<Esc>i<C-R>=Eat()<Cr>
+\subsection{}<Esc>i<C-R>=Eat()<CR>
 }
 
 abbr ssub {
-\subsubsection{}<Esc>i<C-R>=Eat()<Cr>
+\subsubsection{}<Esc>i<C-R>=Eat()<CR>
+}
+
+abbr par {
+\paragraph{}<Esc>i<C-R>=Eat()<CR>
+}
+
+abbr bf {
+\textbf{}<Esc>i<C-R>=Eat()<CR>
+}
+
+abbr it {
+\textit{}<Esc>i<C-R>=Eat()<CR>
+}
+
+# left/right brackets
+abbr lrb {
+\left[\right]<Esc>6hi<C-R>=Eat()<CR>
+}
+
+# left/right parentheses
+abbr lrp {
+\left(\right)<Esc>6hi<C-R>=Eat()<CR>
+}
+
+# left/right vertical bar
+abbr lrv {
+\left\|\right\|<Esc>6hi<C-R>=Eat()<CR>
+}
+
+abbr begin {
+\begin{}<CR>
+\end{}<Esc>k$i
 }
