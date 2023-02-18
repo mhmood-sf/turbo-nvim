@@ -69,13 +69,18 @@ map("n", "<S-j>", "<C-d>M", opts)
 map("n", "<S-k>", "<C-u>M", opts)
 
 -- <C-hjkl> for splits!
-map("n", "<C-h>", ":vsplit<CR>", opts)
-map("n", "<C-k>", ":split<CR>", opts)
-map("n", "<C-l>", ":vsplit<CR><C-w>l", opts)
-map("n", "<C-j>", ":split<CR><C-w>j", opts)
+map("n", "<C-h>", "<CMD>vsplit<CR>", opts)
+map("n", "<C-k>", "<CMD>split<CR>", opts)
+map("n", "<C-l>", "<CMD>vsplit<CR><C-w>l", opts)
+map("n", "<C-j>", "<CMD>split<CR><C-w>j", opts)
 
 -- <Esc> to clear search highlighting
-map("n", "<Esc>", "<Cmd>nohlsearch|diffupdate<CR><C-L>", opts)
+map("n", "<Esc>", "<CMD>nohlsearch|diffupdate<CR><C-L>", opts)
+
+-- Telescope mappings
+map("n", "<Leader>ff", "<CMD>Telescope find_files<CR>", opts)
+map("n", "<Leader>fg", "<CMD>Telescope live_grep<CR>", opts)
+map("n", "<Leader>fb", "<CMD>Telescope buffers<CR>", opts)
 
 --[[ Turned off because they seem to be slowing down startup time a bit!
 

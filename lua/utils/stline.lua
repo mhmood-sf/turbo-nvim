@@ -1,9 +1,20 @@
 --- Custom statusline
- 
+
+vim.g.modenames = {
+    n = "normal",
+    v = "visual",
+    t = "terminal",
+    s = "select",
+    i = "insert",
+    ["!"] = "shell",
+    r = "prompt",
+    c = "cmd"
+}
+
 -- Note that it must be loaded AFTER colorscheme,
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
-vim.o.statusline = "%#StatusLineInv# %{toupper(mode())} %#StatusLine# %= %Y ┃ %P ┃ %l:%c %q%r%h█"
+vim.o.statusline = "%#StatusLineInv# %{toupper(get(g:modenames, mode(), mode(1)))} %#StatusLine# %= %Y ┃ %P ┃ %l:%c %q%r%h█"
 vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %f %#StatusLineNC# %="
 vim.cmd "highlight StatusLine    guifg=#5596F7 guibg=#222430"
 vim.cmd "highlight StatusLineInv guifg=#222430 guibg=#5596F7"
@@ -37,7 +48,5 @@ local symbol = {
 }
 
 local misc = "                                    "
-
-
 
 --]]
