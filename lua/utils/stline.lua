@@ -15,13 +15,13 @@ vim.g.modenames = {
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
 vim.o.statusline = "%#StatusLineInv#%{toupper(get(g:modenames, mode(), mode(1)))} %#StatusLine# %{getcwd()} %= %Y ┃ %P ┃ %l:%c %q%r%h%#StatusLine#█"
-vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %t %#StatusLineNC# %="
+vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %f %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%#StatusLineNC# %="
 
 local hi = require("aks").hi
 local color = require("aks").colors
 
 hi("StatusLine",    { fg = color.accent5, bg = color.shade1 })
-hi("StatusLineInv", { fg = color.shade1, bg = color.accent5 })
+hi("StatusLineInv", { fg = color.shade1,  bg = color.accent5 })
 
 --[[
 vim.cmd "highlight StatusLine    guifg=#5596F7 guibg=#222430"
