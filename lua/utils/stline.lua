@@ -14,8 +14,8 @@ vim.g.modenames = {
 -- Note that it must be loaded AFTER colorscheme,
 -- otherwise colorscheme highlights may overwrite
 -- statusline colors.
-vim.o.statusline = "%#StatusLineInv# %{toupper(get(g:modenames, mode(), mode(1)))} %#StatusLine# %= %Y ┃ %P ┃ %l:%c %q%r%h█"
-vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %f %#StatusLineNC# %="
+vim.o.statusline = "%#StatusLineInv#%{toupper(get(g:modenames, mode(), mode(1)))} %#StatusLine# %{getcwd()} %= %Y ┃ %P ┃ %l:%c %q%r%h%#StatusLine#█"
+vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %t %#StatusLineNC# %="
 
 local hi = require("aks").hi
 local color = require("aks").colors
