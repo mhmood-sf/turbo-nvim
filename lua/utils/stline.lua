@@ -16,12 +16,21 @@ vim.g.modenames = {
 -- statusline colors.
 vim.o.statusline = "%#StatusLineInv# %{toupper(get(g:modenames, mode(), mode(1)))} %#StatusLine# %= %Y ┃ %P ┃ %l:%c %q%r%h█"
 vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '%#StatusLine#' %}%{getbufvar(bufnr(), '&mod') ? ' ●' : ''} %f %#StatusLineNC# %="
+
+local hi = require("aks").hi
+local color = require("aks").colors
+
+hi("StatusLine",    { fg = color.accent5, bg = color.shade1 })
+hi("StatusLineInv", { fg = color.shade1, bg = color.accent5 })
+
+--[[
 vim.cmd "highlight StatusLine    guifg=#5596F7 guibg=#222430"
 vim.cmd "highlight StatusLineInv guifg=#222430 guibg=#5596F7"
 
 vim.cmd "highlight TabLine      guifg=#5596F7 guibg=#222430"
 vim.cmd "highlight TabLineSel   guifg=#222430 guibg=#5596F7"
 vim.cmd "highlight TabLineFill  guifg=#5596F7 guibg=#222430"
+--]]
 
 --[[
 local symbol = {
