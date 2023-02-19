@@ -18,7 +18,7 @@ Jet.pack "quintik" {
 
     { uri = "git@github.com:quintik/aks-nvim",
       opt = false,
-      cfg = function() vim.cmd "colorscheme aks" end }
+      cfg = function() vim.g.aks_variant = "dark"; vim.cmd "colorscheme aks" end }
 }
 
 -- Nvim stuff
@@ -52,5 +52,9 @@ Jet.pack "misc" {
           local color = require"aks".colors
           require("indent_blankline").setup { show_current_context = true }
           hi("IndentBlanklineContextChar", { fg = color.shade4, bg = color.shade0 })
-      end }
+      end },
+
+    { name = "mason",
+      uri  = "git@github.com:williamboman/mason.nvim",
+      cfg  = function() require("mason").setup({}) end }
 }
