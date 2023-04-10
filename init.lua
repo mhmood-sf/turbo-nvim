@@ -100,6 +100,9 @@ cmd "autocmd WinEnter * set cul"
 cmd "autocmd WinLeave * set nocul"
 --]]
 
+-- Some reason winbar isn't updated after writing buffer in 0.9.0
+cmd "autocmd BufWritePost * redrawstatus"
+
 --[ Editor Commands ]--
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
 
