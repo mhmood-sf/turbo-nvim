@@ -1,7 +1,7 @@
 -- LSP Config
 
--- Sumneko Lua Language Server
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
+-- TODO: sumneko deprecated, use lua_ls instead.
+--[[
 local sumneko_root = vim.fn.stdpath('data') .. "/lspconfig/sumneko/"
 local sumneko_bin  = sumneko_root .. "/bin/Linux/lua-language-server"
 local lua_runtime  = vim.split(package.path, ";")
@@ -28,10 +28,11 @@ require'lspconfig'.sumneko_lua.setup {
         }
     }
 }
+--]]
 
 -- Deno
 local HOME = os.getenv("HOME")
-local deno_bin = HOME .. "/.deno/bin/deno"
+local deno_bin = HOME .. "/.deno/bin/bin/deno"
 require'lspconfig'.denols.setup {
     cmd = {deno_bin, "lsp"}
 }
