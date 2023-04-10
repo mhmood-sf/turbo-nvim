@@ -1,38 +1,30 @@
 abbr template {
 \documentclass{article}<CR><CR>
-
 \usepackage{xcolor,graphicx,amsmath,amssymb,amsthm,mathtools,geometry}<CR><CR>
-
+\usepackage{enumitem}<CR><CR>
 \usepackage{hyperref}<CR><CR>
-
 \geometry{<CR>
 margin=1in,<CR>
 headheight=\baselineskip,<CR>
 headsep=\baselineskip,<CR>
 heightrounded<CR>
 }<CR><CR>
-
 \hypersetup{<CR>
 pdfstartview={XYZ null null 1.00},<CR>
 colorlinks=true,<CR>
 urlcolor=cyan,<CR>
 linkcolor=cyan<CR>
 }<CR><CR>
-
 \setlength{\parskip}{1em}<CR>
 \setlength{\parindent}{0pt}<CR><CR>
-
 \newcommand{\N}{\mathbb{N}}<CR>
 \newcommand{\Z}{\mathbb{Z}}<CR>
 \newcommand{\Q}{\mathbb{Q}}<CR>
 \newcommand{\R}{\mathbb{R}}<CR>
 \newcommand{\C}{\mathbb{C}}<CR>
 \newcommand{\F}{\mathbb{F}}<CR><CR>
-
 \newcommand{\info}[3]{{\parindent=0pt\textbf{#1 \hfill #2}} \\ \vspace{-5pt} \hrule}<CR><CR>
-
 \begin{document}<CR><CR>
-
 \end{document}<Esc>ki<C-R>=Eat()<CR>
 }
 
@@ -113,5 +105,10 @@ abbr lrv {
 
 abbr begin {
 \begin{}<CR>
-\end{}<Esc>k$i
+\end{}<Esc>k$i<C-R>=Eat()<CR>
+}
+
+abbr bmatrix {
+\begin{bmatrix}<CR>
+\end{bmatrix}<Esc>ko
 }
