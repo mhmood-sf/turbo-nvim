@@ -29,10 +29,14 @@ vim.o.cc    = "80"    -- colorcolumn: Highlight col to help align text.
 vim.o.ff    = "unix"  -- fileformat: Unix file endings.
 vim.o.spl   = "en_gb" -- spelllang: Set spelling language.
 
+-- splitkeep: Keep topline same when scrolling windows.
+vim.o.spk = "topline"
 -- wildmode: Bash-like tab completion.
 vim.o.wim = "longest,list"
 -- undodir: Directory for the undofile
 vim.o.udir = fn.stdpath("data") .. "/undo/"
+-- showcmdloc: Show command in statusline.
+vim.o.sloc  = "statusline"
 
 -- See `:h ft-tex-plugin`
 vim.g.tex_flavor = "latex"
@@ -100,6 +104,7 @@ cmd "autocmd WinLeave * set nocul"
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
 
 --[ Plugins ]--
+
 require "jet-config"
 
 --[ Mini-Plugins ]--
