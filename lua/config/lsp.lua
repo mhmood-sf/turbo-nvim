@@ -32,7 +32,7 @@ require'lspconfig'.sumneko_lua.setup {
 
 -- Deno
 local HOME = os.getenv("HOME")
-local deno_bin = HOME .. "/.deno/bin/bin/deno"
+local deno_bin = HOME .. "/.deno/bin/deno"
 require'lspconfig'.denols.setup {
     cmd = {deno_bin, "lsp"}
 }

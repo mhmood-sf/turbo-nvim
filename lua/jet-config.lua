@@ -50,11 +50,16 @@ Jet.pack "misc" {
       cfg = function()
           local hi = require"aks".hi
           local color = require"aks".colors
-          require("indent_blankline").setup { show_current_context = true }
+          require("indent_blankline").setup { show_current_context = false }
           hi("IndentBlanklineContextChar", { fg = color.shade4, bg = color.shade0 })
       end },
 
     { name = "mason",
       uri  = "git@github.com:williamboman/mason.nvim",
-      cfg  = function() require("mason").setup({}) end }
+      cfg  = function() require("mason").setup({}) end },
+
+    { uri = "https://github.com/puremourning/vimspector",
+      opt = true,
+      on  = { "CmdUndefined Spector" },
+      cfg = function() require "config.vimspector" end }
 }

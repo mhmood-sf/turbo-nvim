@@ -31,7 +31,7 @@ local options = {
       preview_cutoff = 120,
     },
     file_sorter = require("telescope.sorters").get_fuzzy_file,
-    file_ignore_patterns = { "node_modules", "git" },
+    file_ignore_patterns = { "node_modules", "git", "dist-newstyle" },
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     path_display = { "truncate" },
     winblend = 0,
@@ -52,6 +52,15 @@ local options = {
   extensions_list = { "themes", "terms" },
 }
 
+-- Mappings
+local map  = vim.api.nvim_set_keymap
+local opts = { noremap = true }
+
+map("n", "<Leader>ff", "<CMD>Telescope find_files<CR>", opts)
+map("n", "<Leader>fg", "<CMD>Telescope live_grep<CR>", opts)
+map("n", "<Leader>fb", "<CMD>Telescope buffers<CR>", opts)
+
+-- Colorscheme
 local hi = require"aks".hi
 local color = require"aks".colors
 

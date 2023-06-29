@@ -20,7 +20,8 @@ vim.o.cul   = true    -- cursorline: Highlight current line.
 vim.o.title = false   -- title: Don't set terminal title.
 vim.o.wrap  = false   -- wrap: Dont wrap lines.
 
-vim.o.ls    = 3       -- laststatus: Show statusline only when needed.
+vim.o.so    = 9       -- scrolloff: 9 lines scroll offset.
+vim.o.ls    = 3       -- laststatus: Always show one statusline.
 vim.o.sts   = 4       -- softtabstop: 4 spaces as one tab.
 vim.o.ts    = 4       -- tabstop: Number of cols in one tab char.
 vim.o.sw    = 4       -- shiftwidth: Autoindent width.
@@ -35,8 +36,6 @@ vim.o.spk = "topline"
 vim.o.wim = "longest,list"
 -- undodir: Directory for the undofile
 vim.o.udir = fn.stdpath("data") .. "/undo/"
--- showcmdloc: Show command in statusline.
-vim.o.sloc  = "statusline"
 
 -- See `:h ft-tex-plugin`
 vim.g.tex_flavor = "latex"
@@ -81,11 +80,6 @@ map("n", "<C-j>", "<CMD>split<CR><C-w>j", opts)
 -- <Esc> to clear search highlighting
 map("n", "<Esc>", "<CMD>nohlsearch|diffupdate<CR><C-L>", opts)
 
--- Telescope mappings
-map("n", "<Leader>ff", "<CMD>Telescope find_files<CR>", opts)
-map("n", "<Leader>fg", "<CMD>Telescope live_grep<CR>", opts)
-map("n", "<Leader>fb", "<CMD>Telescope buffers<CR>", opts)
-
 --[[ Turned off because they seem to be slowing down startup time a bit!
 
 --[ Autocmds ]--
@@ -99,9 +93,6 @@ cmd "autocmd BufNewFile,BufRead *.cls set syntax=tex"
 cmd "autocmd WinEnter * set cul"
 cmd "autocmd WinLeave * set nocul"
 --]]
-
--- Some reason winbar isn't updated after writing buffer in 0.9.0
-cmd "autocmd BufWritePost * redrawstatus"
 
 --[ Editor Commands ]--
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
