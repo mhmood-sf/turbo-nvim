@@ -72,8 +72,8 @@ local function new_main_ref()
     vim.cmd "normal G"
 end
 
-vim.cmd "command! Note lua require\"utils.vault\".new_today_note()"
-vim.cmd "command! Ref  lua require\"utils.vault\".new_main_ref()"
+--vim.cmd "command! Note lua require\"utils.vault\".new_today_note()"
+--vim.cmd "command! Ref  lua require\"utils.vault\".new_main_ref()"
 
 return {
     new_main_ref = new_main_ref,

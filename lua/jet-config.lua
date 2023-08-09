@@ -5,7 +5,9 @@ local Jet = require "jet"
 -- Own plugins
 Jet.pack "quintik" {
     "git@github.com:quintik/jet-nvim",
-    "git@github.com:quintik/abby-nvim",
+
+    { uri = "git@github.com:quintik/abby-nvim",
+      opt = false },
 
     { uri = "git@github.com:quintik/onedark-minimal",
       opt = true,
@@ -18,7 +20,12 @@ Jet.pack "quintik" {
 
     { uri = "git@github.com:quintik/aks-nvim",
       opt = false,
-      cfg = function() vim.g.aks_variant = "dark"; vim.cmd "colorscheme aks" end }
+      cfg =
+        function()
+            vim.g.aks_variant = "dark"
+            vim.cmd "colorscheme aks"
+        end
+    }
 }
 
 -- Nvim stuff
@@ -47,19 +54,16 @@ Jet.pack "misc" {
     "git@github.com:ervandew/supertab",
 
     { uri = "git@github.com:lukas-reineke/indent-blankline.nvim",
-      cfg = function()
-          local hi = require"aks".hi
-          local color = require"aks".colors
-          require("indent_blankline").setup { show_current_context = false }
-          hi("IndentBlanklineContextChar", { fg = color.shade4, bg = color.shade0 })
-      end },
+      cfg =
+        function()
+            local hi = require"aks".hi
+            local color = require"aks".colors
+            require("indent_blankline").setup { show_current_context = false }
+            hi("IndentBlanklineContextChar", { fg = color.shade4, bg = color.shade0 })
+        end
+    },
 
     { name = "mason",
       uri  = "git@github.com:williamboman/mason.nvim",
       cfg  = function() require("mason").setup({}) end },
-
-    { uri = "https://github.com/puremourning/vimspector",
-      opt = true,
-      on  = { "CmdUndefined Spector" },
-      cfg = function() require "config.vimspector" end }
 }

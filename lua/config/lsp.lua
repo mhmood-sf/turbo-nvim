@@ -1,5 +1,33 @@
 -- LSP Config
 
+-- Taken from https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
+-- Opens diagnostics in float.
+-- You will likely want to reduce updatetime which affects CursorHold
+-- note: this setting is global and should be set only once
+vim.o.updatetime = 500
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+-- Add borders
+-- See: https://vi.stackexchange.com/a/39075
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+        border = "single"
+    }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+        border = "single"
+    }
+)
+
+vim.diagnostic.config {
+  float = {
+      border = "single"
+  },
+  virtual_text = false
+}
+
 -- TODO: sumneko deprecated, use lua_ls instead.
 --[[
 local sumneko_root = vim.fn.stdpath('data') .. "/lspconfig/sumneko/"
