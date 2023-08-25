@@ -21,7 +21,7 @@ vim.o.title = false   -- title: Don't set terminal title.
 vim.o.wrap  = false   -- wrap: Dont wrap lines.
 
 vim.o.so    = 9       -- scrolloff: 9 lines scroll offset.
-vim.o.ls    = 3       -- laststatus: Always show one statusline.
+vim.o.ls    = 2       -- laststatus: Always show one statusline.
 vim.o.sts   = 4       -- softtabstop: 4 spaces as one tab.
 vim.o.ts    = 4       -- tabstop: Number of cols in one tab char.
 vim.o.sw    = 4       -- shiftwidth: Autoindent width.
@@ -37,9 +37,13 @@ vim.o.wim = "longest,list"
 -- undodir: Directory for the undofile
 vim.o.udir = fn.stdpath("data") .. "/undo/"
 
--- See `:h ft-tex-plugin`
+--[ TeX FT Plugin Options ]--
 vim.g.tex_flavor = "latex"
 
+--[ Netrw Options ]--
+vim.g.netrw_preview = 1
+vim.g.newtrw_liststyle = 3
+vim.g.netrw_winsize = 20
 
 --[ Mappings ]--
 vim.g.mapleader = " "
@@ -80,33 +84,13 @@ map("n", "<C-j>", "<CMD>split<CR><C-w>j", opts)
 -- <Esc> to clear search highlighting
 map("n", "<Esc>", "<CMD>nohlsearch|diffupdate<CR><C-L>", opts)
 
---[[ Turned off because they seem to be slowing down startup time a bit!
-
---[ Autocmds ]--
-
--- Filetype detection
-cmd "autocmd BufNewFile,BufRead *.ejs set syntax=html"
-cmd "autocmd BufNewFile,BufRead *.sty set syntax=tex"
-cmd "autocmd BufNewFile,BufRead *.cls set syntax=tex"
-
--- Set cursorline for active window
-cmd "autocmd WinEnter * set cul"
-cmd "autocmd WinLeave * set nocul"
---]]
-
 --[ Editor Commands ]--
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
 
---[ Plugins ]--
-
-require "jet-config"
-
 --[ Mini-Plugins ]--
 require("utils.pair").create { "()", "{}", "[]", "\"\"" }
-require "utils.vault"
-require "utils.stline"
 
---[ Netrw ]--
-vim.g.netrw_preview = 1
-vim.g.newtrw_liststyle = 3
-vim.g.netrw_winsize = 20
+--[ Plugins ]--
+-- We load these at the end, so that any plugin-related global variables are
+-- defined before the plugins are loaded.
+require "jet-config"

@@ -3,27 +3,23 @@
 local Jet = require "jet"
 
 -- Own plugins
-Jet.pack "quintik" {
-    "git@github.com:quintik/jet-nvim",
+Jet.pack "mhmoooods" {
+    "git@github.com:mhmoooods/jet-nvim",
 
-    { uri = "git@github.com:quintik/abby-nvim",
+    { uri = "git@github.com:mhmoooods/abby-nvim",
       opt = false },
 
-    { uri = "git@github.com:quintik/onedark-minimal",
-      opt = true,
-      cfg =
-        function()
-            vim.g.onedark_contrast = true
-            vim.cmd "colorscheme onedark-minimal"
-        end
-    },
-
-    { uri = "git@github.com:quintik/aks-nvim",
+    { uri = "git@github.com:mhmoooods/aks-nvim",
       opt = false,
       cfg =
         function()
             vim.g.aks_variant = "dark"
             vim.cmd "colorscheme aks"
+            local hi = require("aks").hi
+            local color = require("aks").colors
+
+            hi("StatusLine", { fg = color.accent6, bg = color.shade0 })
+            vim.o.stl = " %f %m%r%h %= %Y • %l:%c • %P "
         end
     }
 }
