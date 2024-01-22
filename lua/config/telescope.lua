@@ -61,8 +61,8 @@ map("n", "<Leader>fg", "<CMD>Telescope live_grep<CR>", opts)
 map("n", "<Leader>fb", "<CMD>Telescope buffers<CR>", opts)
 
 -- Colorscheme
-local hi = require"aks".hi
-local color = require"aks".colors
+local hi = require(vim.g.colors_name).hi
+local color = require(vim.g.colors_name).colors
 
 hi("TelescopePromptCounter", { fg = color.shade7, bg = color.shade1 })
 hi("TelescopePromptNormal",  { fg = color.shade7, bg = color.shade1 })

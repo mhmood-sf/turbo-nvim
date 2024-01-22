@@ -3,25 +3,41 @@
 local Jet = require "jet"
 
 -- Own plugins
-Jet.pack "mhmoooods" {
-    "git@github.com:mhmoooods/jet-nvim",
+Jet.pack "mhmood-sf" {
+    "git@github.com:mhmood-sf/jet-nvim",
 
-    { uri = "git@github.com:mhmoooods/abby-nvim",
+    { uri = "git@github.com:mhmood-sf/abby-nvim",
       opt = false },
 
-    { uri = "git@github.com:mhmoooods/aks-nvim",
-      opt = false,
+
+    { uri = "git@github.com:mhmood-sf/aks-nvim",
+      opt = true,
       cfg =
         function()
             vim.g.aks_variant = "dark"
             vim.cmd "colorscheme aks"
-            local hi = require("aks").hi
-            local color = require("aks").colors
 
-            hi("StatusLine", { fg = color.accent6, bg = color.shade0 })
+            local hi = require(vim.g.colors_name).hi
+            local color = require(vim.g.colors_name).colors
+
+            hi("StatusLine", { fg = color.accent6 })
             vim.o.stl = " %f %m%r%h %= %Y • %l:%c • %P "
         end
-    }
+    },
+
+    { uri = "git@guthub.com:mhmood-sf/lazyfox-nvim",
+      opt = false,
+      cfg =
+        function()
+            vim.cmd "colorscheme lazyfox"
+
+            local hi = require(vim.g.colors_name).hi
+            local color = require(vim.g.colors_name).colors
+
+            hi("StatusLine", { fg = color.accent6 })
+            vim.o.stl = " %f %m%r%h %= %Y • %l:%c • %P "
+        end
+    },
 }
 
 -- Nvim stuff
@@ -52,10 +68,10 @@ Jet.pack "misc" {
     { uri = "git@github.com:lukas-reineke/indent-blankline.nvim",
       cfg =
         function()
-            local hi = require"aks".hi
-            local color = require"aks".colors
-            require("indent_blankline").setup { show_current_context = false }
-            hi("IndentBlanklineContextChar", { fg = color.shade4, bg = color.shade0 })
+            local hi = require(vim.g.colors_name).hi
+            local color = require(vim.g.colors_name).colors
+            require("ibl").setup()
+            hi("IblIndent", { fg = color.shade4, bg = color.shade0 })
         end
     },
 

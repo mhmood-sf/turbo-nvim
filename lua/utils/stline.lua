@@ -20,8 +20,8 @@ vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '
 -- We want laststatus = 3 for this statusline.
 vim.o.ls = 3
 
-local hi = require("aks").hi
-local color = require("aks").colors
+local hi = (vim.g.colors_name).hi
+local color = (vim.g.colors_name).colors
 
 hi("StatusLine",    { fg = color.accent5, bg = color.shade1 })
 hi("StatusLineInv", { fg = color.shade0,  bg = color.accent5 })
