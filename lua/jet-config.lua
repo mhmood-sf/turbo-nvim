@@ -16,26 +16,14 @@ Jet.pack "mhmood-sf" {
         function()
             vim.g.aks_variant = "dark"
             vim.cmd "colorscheme aks"
-
-            local hi = require(vim.g.colors_name).hi
-            local color = require(vim.g.colors_name).colors
-
-            hi("StatusLine", { fg = color.accent6 })
-            vim.o.stl = " %f %m%r%h %= %Y • %l:%c • %P "
         end
     },
 
-    { uri = "git@guthub.com:mhmood-sf/lazyfox-nvim",
+    { uri = "git@github.com:mhmood-sf/lazyfox-nvim",
       opt = false,
       cfg =
         function()
             vim.cmd "colorscheme lazyfox"
-
-            local hi = require(vim.g.colors_name).hi
-            local color = require(vim.g.colors_name).colors
-
-            hi("StatusLine", { fg = color.accent6 })
-            vim.o.stl = " %f %m%r%h %= %Y • %l:%c • %P "
         end
     },
 }

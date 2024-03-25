@@ -1,5 +1,7 @@
 -- LSP Config
 
+local lspcfg = require "lspconfig"
+
 -- Taken from https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
 -- Opens diagnostics in float.
 -- You will likely want to reduce updatetime which affects CursorHold
@@ -42,7 +44,7 @@ local lua_runtime  = vim.split(package.path, ";")
 table.insert(lua_runtime, "lua/?.lua")
 table.insert(lua_runtime, "lua/?/init.lua")
 
-require'lspconfig'.lua_ls.setup {
+lspcfg.lua_ls.setup {
     cmd = { lua_ls },
     settings = {
         Lua = {
@@ -74,6 +76,11 @@ require'lspconfig'.lua_ls.setup {
 -- Deno
 local HOME = os.getenv("HOME")
 local deno_bin = HOME .. "/.deno/bin/deno"
-require'lspconfig'.denols.setup {
+lspcfg.denols.setup {
     cmd = {deno_bin, "lsp"}
+}
+
+-- AST-Grep
+lspcfg.ast_grep.setup {
+    filetypes = { "c", "cpp", "rust", "java", "python", "html", "css" }
 }

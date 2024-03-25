@@ -7,7 +7,7 @@ setlocal conceallevel=2
 " === Custom editor commands
 command! -buffer -nargs=0 TeXOpen      call s:open()
 command! -buffer -nargs=0 TeXBuild     call s:build()
-command! -buffer -nargs=0 TeXSetMain   let s:tex_maindoc=expand("%")
+command! -buffer -nargs=0 TeXSetMain   let s:tex_maindoc=expand("%:p")
 command! -buffer -nargs=0 TeXOpenThis  call s:open(expand("%:p"))
 command! -buffer -nargs=0 TeXBuildThis call s:build(expand("%:p"))
 

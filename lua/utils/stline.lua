@@ -1,14 +1,29 @@
---- Custom statusline
-
 vim.g.modenames = {
     n = "normal",
+    no = "op pending",
+    nov = "op pending",
+    noV = "op pending",
     v = "visual",
-    t = "terminal",
+    vs = "visual",
+    V = "visual",
+    Vs = "visual",
     s = "select",
+    S = "select",
     i = "insert",
-    ["!"] = "shell",
+    ic = "insert",
+    ix = "insert",
+    R = "replace",
+    Rc = "replace",
+    Rx = "replace",
+    Rv = "replace",
+    Rvc = "replace",
+    Rvx = "replace",
     r = "prompt",
-    c = "cmd"
+    rm = "prompt",
+    c = "cmd",
+    cv = "ex mode",
+    ["!"] = "shell",
+    t = "terminal",
 }
 
 -- Note that it must be loaded AFTER colorscheme,
@@ -20,8 +35,8 @@ vim.o.winbar = "%= %{%g:actual_curwin == win_getid() ? '%#StatusLineInv#' : '
 -- We want laststatus = 3 for this statusline.
 vim.o.ls = 3
 
-local hi = (vim.g.colors_name).hi
-local color = (vim.g.colors_name).colors
+local hi = require(vim.g.colors_name).hi
+local color = require(vim.g.colors_name).colors
 
 hi("StatusLine",    { fg = color.accent5, bg = color.shade1 })
 hi("StatusLineInv", { fg = color.shade0,  bg = color.accent5 })
@@ -30,31 +45,3 @@ hi("TabLineSel",    { fg = color.accent5, bg = color.shade0 })
 hi("TabLineFill",   { fg = color.shade3,  bg = color.shade0 })
 
 hi("StatusLineInactiveSlant", { fg = color.shade1, bg = color.shade0 })
-
---[[
-local symbol = {
-    vertical_bar = '┃',
-    vertical_bar_thin = '│',
-    left = '',
-    right = '',
-    block = '█',
-    left_filled = '',
-    right_filled = '',
-    slant_left = '',
-    slant_left_thin = '',
-    slant_right = '',
-    slant_right_thin = '',
-    slant_left_2 = '',
-    slant_left_2_thin = '',
-    slant_right_2 = '',
-    slant_right_2_thin = '',
-    left_rounded = '',
-    left_rounded_thin = '',
-    right_rounded = '',
-    right_rounded_thin = '',
-    circle = '●',
-}
-
-local misc = "                                    "
-
---]]

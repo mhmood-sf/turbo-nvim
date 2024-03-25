@@ -87,10 +87,11 @@ map("n", "<Esc>", "<CMD>nohlsearch|diffupdate<CR><C-L>", opts)
 --[ Editor Commands ]--
 cmd "command! -nargs=0 InitLua edit $MYVIMRC"
 
---[ Mini-Plugins ]--
-require("utils.pair").create { "()", "{}", "[]", "\"\"" }
-
 --[ Plugins ]--
--- We load these at the end, so that any plugin-related global variables are
+-- We load these near the end, so that any plugin-related global variables are
 -- defined before the plugins are loaded.
 require "jet-config"
+
+--[ Mini-Plugins ]--
+require("utils.pair").create { "()", "{}", "[]", "\"\"" }
+require("utils.stline")
